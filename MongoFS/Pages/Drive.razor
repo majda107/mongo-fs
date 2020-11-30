@@ -1,0 +1,97 @@
+@page "/drives/{id}"
+@using MongoDB.Bson
+@using MongoDB.Bson.Serialization.IdGenerators
+@inject MongoService _ms
+
+<h3>Drive</h3>
+
+@if (drive != null)
+{
+    <h4>@drive.Id</h4>
+    <span>@(drive.Capacity)GB</span>
+
+    <hr/>
+    <button @onclick="async () => { await UpFolder(); }">Go up</button>
+    @foreach (var section in path.Reverse())
+    {
+        <span>/@(section.Name)</span>
+    }
+    <hr/>
+
+    <ul>
+        @foreach (var folder in folders)
+        {
+            <li @onclick="async () => { await EnterFolder(folder); }">@folder.Name</li>
+        }
+    </ul>
+
+    <input @bind="newName" placeholder="Folder name"/>
+    <button @onclick="() => { CreateFolder(); }">Add</button>
+}
+
+else
+{
+    <span>Couldn't find drive...</span>
+}
+
+@code {
+
+    [Parameter]
+    public string Id { get; set; }
+
+    private DriveModel drive;
+
+    // private ObjectId parent = ObjectId.Empty;
+    private Stack<FolderModel> path = new Stack<FolderModel>();
+
+    private ObjectId parent
+    {
+        get => path.FirstOrDefault()?.Id ?? ObjectId.Empty;
+    }
+
+    private IList<FolderModel> folders = new List<FolderModel>();
+
+
+    private string newName = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (ObjectId.TryParse(this.Id, out ObjectId parsedId))
+        {
+            this.drive = await this._ms.GetDrive(parsedId);
+            await this.RefreshFolders();
+        }
+    }
+
+    private async Task RefreshFolders()
+    {
+        this.folders = await this._ms.GetFolders(drive.Id, parent);
+        this.StateHasChanged();
+    }
+
+
+    private async Task CreateFolder()
+    {
+        await this._ms.CreateFolder(this.drive.Id, this.parent, this.newName);
+        await this.RefreshFolders();
+        this.newName = "";
+    }
+
+
+    private async Task EnterFolder(FolderModel folder)
+    {
+        this.path.Push(folder);
+        await this.RefreshFolders();
+
+        this.StateHasChanged();
+    }
+
+    private async Task UpFolder()
+    {
+        if (this.path.Count <= 0) return;
+
+        this.path.Pop();
+        await this.RefreshFolders();
+    }
+
+}

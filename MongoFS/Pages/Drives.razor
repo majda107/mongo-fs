@@ -1,0 +1,32 @@
+@page "/drives"
+@inject MongoService _ms
+@inject NavigationManager _nav;
+
+<h1>Drives</h1>
+
+<ul>
+    @foreach (var drive in this._ms.GetDrives())
+    {
+        <li @onclick='() => { this._nav.NavigateTo($"/drives/{drive.Id.ToString()}"); }'>@drive.Name | @(drive.Capacity)GB <button @onclick="() => { this._ms.RemoveDrive(drive.Id); }">X</button></li>
+    }
+</ul>
+
+<input @bind="name" placeholder="Name"/>
+<input @bind="capacity" type="number"/>
+<button @onclick="() => { this.Add(); }" type="button">Add</button>
+
+@code {
+
+    private string name = "";
+    private int capacity = 500;
+
+    private void Add()
+    {
+        this._ms.CreateDrive(new DriveModel() {Name = name, Capacity = capacity});
+        this.StateHasChanged();
+
+        this.name = "";
+        this.capacity = 500;
+    }
+
+}
