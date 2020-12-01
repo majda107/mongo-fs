@@ -1,0 +1,30 @@
+@page "/file/{fileId}"
+@using MongoDB.Bson
+@inject MongoService _ms;
+
+<h3>FileDetail</h3>
+
+@if (file != null)
+{
+    @file.Name
+}
+else
+{
+    <span>Couldn't find file!</span>
+}
+
+@code {
+
+    [Parameter]
+    public string FileId { get; set; }
+
+
+    private FileModel file { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (ObjectId.TryParse(this.FileId, out ObjectId id))
+            file = await this._ms.GetFile(id);
+    }
+
+}

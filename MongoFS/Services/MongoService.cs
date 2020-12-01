@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -11,8 +13,10 @@ namespace MongoFS.Services
 {
     public class MongoService
     {
+        private const string DATABASE = "mongofs";
         private const string DRIVE = "drive";
         private const string FOLDERS = "folders";
+        private const string FILES = "files";
 
         private readonly MongoClient _client;
         private readonly IMongoDatabase _database;
@@ -20,7 +24,7 @@ namespace MongoFS.Services
         public MongoService()
         {
             this._client = new MongoClient();
-            this._database = this._client.GetDatabase("mongofs");
+            this._database = this._client.GetDatabase(DATABASE);
         }
 
         public IQueryable<DriveModel> GetDrives()
@@ -58,6 +62,30 @@ namespace MongoFS.Services
         }
 
 
+        public async Task<IList<FileModel>> GetFolderFiles(ObjectId drive, ObjectId folder)
+        {
+            var res = await this._database.GetCollection<FileModel>(FILES)
+                .FindAsync(f => f.DriveId == drive && f.FolderId == folder);
+
+            return res.ToList();
+        }
+
+        public async Task<FolderModel> GetDriveFolder(ObjectId drive, ObjectId folder)
+        {
+            return (await this._database.GetCollection<FolderModel>(FOLDERS)
+                .FindAsync(f => f.DriveId == drive && f.Id == folder)).FirstOrDefault();
+        }
+
+
+        public async Task<FileModel> GetFile(ObjectId fileId)
+        {
+            var res = (await this._database.GetCollection<FileModel>(FILES).FindAsync(f => f.Id == fileId))
+                .FirstOrDefault();
+
+            return res;
+        }
+
+
         // TODO register to parent folder (children)
         public async Task CreateFolder(ObjectId drive, ObjectId parent, string name)
         {
@@ -68,6 +96,18 @@ namespace MongoFS.Services
                 DriveId = drive
             });
         }
+
+
+        public async Task CreateFile(ObjectId drive, ObjectId folder, string name)
+        {
+            await this._database.GetCollection<FileModel>(FILES).InsertOneAsync(new FileModel()
+            {
+                DriveId = drive,
+                FolderId = folder,
+                Name = name
+            });
+        }
+
 
         public async Task CreateFolderPath(ObjectId driveId, string path)
         {

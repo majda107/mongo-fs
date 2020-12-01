@@ -1,7 +1,12 @@
 @page "/drives/{id}"
+@page "/drives/{id}/{folderId}"
+@inject IJSRuntime jsRuntime
+
 @using MongoDB.Bson
 @using MongoDB.Bson.Serialization.IdGenerators
-@inject MongoService _ms
+@using MongoDB.Driver.Core.Operations
+@inject MongoService _ms;
+@inject NavigationManager _nav;
 
 <h3>Drive</h3>
 
@@ -12,10 +17,14 @@
 
     <hr/>
     <button @onclick="async () => { await UpFolder(); }">Go up</button>
-    @foreach (var section in path.Reverse())
+    @if (this.parent != null)
     {
-        <span>/@(section.Name)</span>
+        <span>@this.parent.Name</span>
     }
+@*     @foreach (var section in path.Reverse()) *@
+@*     { *@
+@*         <span>/@(section.Name)</span> *@
+@*     } *@
     <hr/>
 
     <ul>
@@ -23,10 +32,15 @@
         {
             <li @onclick="async () => { await EnterFolder(folder); }">@folder.Name</li>
         }
+        @foreach (var file in files)
+        {
+            <li @onclick='() => { this._nav.NavigateTo($"/file/{file.Id}"); }'>[@file.Name]</li>
+        }
     </ul>
 
     <input @bind="newName" placeholder="Folder name"/>
-    <button @onclick="() => { CreateFolder(); }">Add</button>
+    <button @onclick="() => { CreateFolder(); }">Add folder</button>
+    <button @onclick="() => { CreateFile(); }">Add file</button>
 }
 
 else
@@ -39,20 +53,26 @@ else
     [Parameter]
     public string Id { get; set; }
 
+    [Parameter]
+    public string FolderId { get; set; }
+
     private DriveModel drive;
 
     // private ObjectId parent = ObjectId.Empty;
-    private Stack<FolderModel> path = new Stack<FolderModel>();
+    // private Stack<FolderModel> path = new Stack<FolderModel>();
 
-    private ObjectId parent
-    {
-        get => path.FirstOrDefault()?.Id ?? ObjectId.Empty;
-    }
+    // private ObjectId parent
+    // {
+    //     get => path.FirstOrDefault()?.Id ?? ObjectId.Empty;
+    // }
+    private FolderModel parent;
 
     private IList<FolderModel> folders = new List<FolderModel>();
+    private IList<FileModel> files = new List<FileModel>();
 
 
     private string newName = "";
+    private bool rendered = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -61,18 +81,47 @@ else
             this.drive = await this._ms.GetDrive(parsedId);
             await this.RefreshFolders();
         }
+
+        if (ObjectId.TryParse(this.FolderId, out ObjectId folder))
+        {
+    // this.path.Push(await this._ms.getfo);
+            this.parent = await this._ms.GetDriveFolder(this.drive.Id, folder);
+            await this.RefreshFolders();
+        }
+    }
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        this.rendered = true;
+        return Task.CompletedTask;
     }
 
     private async Task RefreshFolders()
     {
-        this.folders = await this._ms.GetFolders(drive.Id, parent);
+        this.folders = await this._ms.GetFolders(drive.Id, this.parent?.Id ?? ObjectId.Empty);
+        this.files = await this._ms.GetFolderFiles(drive.Id, this.parent?.Id ?? ObjectId.Empty);
         this.StateHasChanged();
+
+
+        if (!this.rendered) return;
+    // if (this.path.Count <= 0)
+        if (this.parent == null)
+            await this.jsRuntime.InvokeVoidAsync("ChangeUrl", $"/drives/{Id.ToString()}");
+        else
+            await this.jsRuntime.InvokeVoidAsync("ChangeUrl", $"/drives/{Id.ToString()}/{parent.Id.ToString()}");
     }
 
 
     private async Task CreateFolder()
     {
-        await this._ms.CreateFolder(this.drive.Id, this.parent, this.newName);
+        await this._ms.CreateFolder(this.drive.Id, this.parent.Id, this.newName);
+        await this.RefreshFolders();
+        this.newName = "";
+    }
+
+    private async Task CreateFile()
+    {
+        await this._ms.CreateFile(this.drive.Id, this.parent?.Id ?? ObjectId.Empty, this.newName);
         await this.RefreshFolders();
         this.newName = "";
     }
@@ -80,7 +129,8 @@ else
 
     private async Task EnterFolder(FolderModel folder)
     {
-        this.path.Push(folder);
+    // this.path.Push(folder);
+        this.parent = folder;
         await this.RefreshFolders();
 
         this.StateHasChanged();
@@ -88,9 +138,13 @@ else
 
     private async Task UpFolder()
     {
-        if (this.path.Count <= 0) return;
+    // if (this.path.Count <= 0) return;
 
-        this.path.Pop();
+    // this.path.Pop();
+        
+        if(this.parent == null) return;
+        
+        this.parent = await this._ms.GetDriveFolder(this.drive.Id, this.parent.ParentId);
         await this.RefreshFolders();
     }
 

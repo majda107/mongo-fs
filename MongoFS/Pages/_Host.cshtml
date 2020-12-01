@@ -31,5 +31,10 @@
 </div>
 
 <script src="_framework/blazor.server.js"></script>
+<script>
+window.ChangeUrl = function(url){
+    history.pushState(null, '', url);   
+}
+</script>
 </body>
 </html>

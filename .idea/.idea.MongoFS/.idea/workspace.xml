@@ -19,49 +19,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e62b2a5d-5511-473c-9c71-a5a5437d407a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS.sln" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/App.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/Data/WeatherForecast.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/Data/WeatherForecastService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/Models/DriveModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/Models/FolderModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/MongoFS.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/Pages/Counter.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/Pages/Drive.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/Pages/Drives.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/Pages/Error.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/Pages/Error.cshtml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/Pages/FetchData.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/Pages/Index.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/Pages/_Host.cshtml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/Program.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/Properties/launchSettings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/Services/MongoService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/Shared/MainLayout.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/Shared/MainLayout.razor.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/Shared/NavMenu.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/Shared/NavMenu.razor.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/Shared/SurveyPrompt.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/Startup.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/Style/abstracts/variables.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/Style/style.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/_Imports.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/appsettings.Development.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/appsettings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/wwwroot/css/bootstrap/bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/wwwroot/css/bootstrap/bootstrap.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/wwwroot/css/open-iconic/FONT-LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/wwwroot/css/open-iconic/ICON-LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/wwwroot/css/open-iconic/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/wwwroot/css/open-iconic/font/css/open-iconic-bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/wwwroot/css/open-iconic/font/fonts/open-iconic.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/wwwroot/css/open-iconic/font/fonts/open-iconic.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/wwwroot/css/open-iconic/font/fonts/open-iconic.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/wwwroot/css/open-iconic/font/fonts/open-iconic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/wwwroot/css/open-iconic/font/fonts/open-iconic.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/wwwroot/css/site.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoFS/wwwroot/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MongoFS/Models/FileModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MongoFS/Pages/FileDetail.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MongoFS/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MongoFS/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MongoFS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MongoFS/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MongoFS/App.razor" beforeDir="false" afterPath="$PROJECT_DIR$/MongoFS/App.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MongoFS/Pages/Drive.razor" beforeDir="false" afterPath="$PROJECT_DIR$/MongoFS/Pages/Drive.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MongoFS/Pages/_Host.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/MongoFS/Pages/_Host.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MongoFS/Services/MongoService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MongoFS/Services/MongoService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,6 +55,11 @@
         <option value="$PROJECT_DIR$/MongoFS/Startup.cs" />
         <option value="$PROJECT_DIR$/MongoFS/Models/FolderModel.cs" />
         <option value="$PROJECT_DIR$/MongoFS/Pages/Drives.razor" />
+        <option value="$PROJECT_DIR$/MongoFS/Models/FileModel.cs" />
+        <option value="$PROJECT_DIR$/MongoFS/Pages/File.cshtml" />
+        <option value="$PROJECT_DIR$/MongoFS/Pages/FileDetail.razor" />
+        <option value="$PROJECT_DIR$/MongoFS/App.razor" />
+        <option value="$PROJECT_DIR$/MongoFS/Pages/_Host.cshtml" />
         <option value="$PROJECT_DIR$/MongoFS/Services/MongoService.cs" />
         <option value="$PROJECT_DIR$/MongoFS/Pages/Drive.razor" />
       </list>
@@ -163,6 +133,11 @@
       <workItem from="1606653591114" duration="7689000" />
       <workItem from="1606662944295" duration="329000" />
       <workItem from="1606663320201" duration="1861000" />
+      <workItem from="1606729472674" duration="999000" />
+      <workItem from="1606738832040" duration="3568000" />
+      <workItem from="1606818805807" duration="1520000" />
+      <workItem from="1606821130976" duration="2058000" />
+      <workItem from="1606855250749" duration="1595000" />
     </task>
     <servers />
   </component>
@@ -195,94 +170,94 @@
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
     <state x="1346" y="511" key="#com.intellij.ide.macro.MacrosDialog/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606657245105" />
-    <state width="455" height="464" key="DebuggerActiveHint" timestamp="1606664363730">
+    <state width="455" height="464" key="DebuggerActiveHint" timestamp="1606857930738">
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
-    <state width="455" height="464" key="DebuggerActiveHint/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606664363730" />
+    <state width="455" height="464" key="DebuggerActiveHint/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606857930738" />
     <state x="1218" y="467" width="1063" height="671" key="EditFileWatcherDialog" timestamp="1606658157899">
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
     <state x="1218" y="467" width="1063" height="671" key="EditFileWatcherDialog/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606658157899" />
-    <state width="1638" height="145" key="GridCell.Tab.0.bottom" timestamp="1606671016539">
+    <state width="1638" height="246" key="GridCell.Tab.0.bottom" timestamp="1606857803152">
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
-    <state width="1638" height="145" key="GridCell.Tab.0.bottom/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606671016539" />
-    <state width="1638" height="145" key="GridCell.Tab.0.center" timestamp="1606671016539">
+    <state width="1638" height="246" key="GridCell.Tab.0.bottom/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606857803152" />
+    <state width="1638" height="246" key="GridCell.Tab.0.center" timestamp="1606857803152">
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
-    <state width="1638" height="145" key="GridCell.Tab.0.center/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606671016539" />
-    <state width="1638" height="145" key="GridCell.Tab.0.left" timestamp="1606671016538">
+    <state width="1638" height="246" key="GridCell.Tab.0.center/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606857803152" />
+    <state width="1638" height="246" key="GridCell.Tab.0.left" timestamp="1606857803151">
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
-    <state width="1638" height="145" key="GridCell.Tab.0.left/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606671016538" />
-    <state width="1638" height="145" key="GridCell.Tab.0.right" timestamp="1606671016539">
+    <state width="1638" height="246" key="GridCell.Tab.0.left/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606857803151" />
+    <state width="1638" height="246" key="GridCell.Tab.0.right" timestamp="1606857803152">
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
-    <state width="1638" height="145" key="GridCell.Tab.0.right/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606671016539" />
-    <state width="1638" height="145" key="GridCell.Tab.1.bottom" timestamp="1606671016540">
+    <state width="1638" height="246" key="GridCell.Tab.0.right/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606857803152" />
+    <state width="1638" height="246" key="GridCell.Tab.1.bottom" timestamp="1606857847748">
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
-    <state width="1638" height="145" key="GridCell.Tab.1.bottom/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606671016540" />
-    <state width="1638" height="145" key="GridCell.Tab.1.center" timestamp="1606671016540">
+    <state width="1638" height="246" key="GridCell.Tab.1.bottom/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606857847748" />
+    <state width="1638" height="246" key="GridCell.Tab.1.center" timestamp="1606857847747">
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
-    <state width="1638" height="145" key="GridCell.Tab.1.center/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606671016540" />
-    <state width="1638" height="145" key="GridCell.Tab.1.left" timestamp="1606671016539">
+    <state width="1638" height="246" key="GridCell.Tab.1.center/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606857847747" />
+    <state width="1638" height="246" key="GridCell.Tab.1.left" timestamp="1606857847747">
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
-    <state width="1638" height="145" key="GridCell.Tab.1.left/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606671016539" />
-    <state width="1638" height="145" key="GridCell.Tab.1.right" timestamp="1606671016540">
+    <state width="1638" height="246" key="GridCell.Tab.1.left/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606857847747" />
+    <state width="1638" height="246" key="GridCell.Tab.1.right" timestamp="1606857847748">
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
-    <state width="1638" height="145" key="GridCell.Tab.1.right/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606671016540" />
-    <state width="1638" height="145" key="GridCell.Tab.2.bottom" timestamp="1606671016541">
+    <state width="1638" height="246" key="GridCell.Tab.1.right/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606857847748" />
+    <state width="1638" height="246" key="GridCell.Tab.2.bottom" timestamp="1606857803031">
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
-    <state width="1638" height="145" key="GridCell.Tab.2.bottom/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606671016541" />
-    <state width="1638" height="145" key="GridCell.Tab.2.center" timestamp="1606671016540">
+    <state width="1638" height="246" key="GridCell.Tab.2.bottom/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606857803031" />
+    <state width="1638" height="246" key="GridCell.Tab.2.center" timestamp="1606857803030">
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
-    <state width="1638" height="145" key="GridCell.Tab.2.center/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606671016540" />
-    <state width="1638" height="145" key="GridCell.Tab.2.left" timestamp="1606671016540">
+    <state width="1638" height="246" key="GridCell.Tab.2.center/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606857803030" />
+    <state width="1638" height="246" key="GridCell.Tab.2.left" timestamp="1606857803029">
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
-    <state width="1638" height="145" key="GridCell.Tab.2.left/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606671016540" />
-    <state width="1638" height="145" key="GridCell.Tab.2.right" timestamp="1606671016541">
+    <state width="1638" height="246" key="GridCell.Tab.2.left/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606857803029" />
+    <state width="1638" height="246" key="GridCell.Tab.2.right" timestamp="1606857803030">
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
-    <state width="1638" height="145" key="GridCell.Tab.2.right/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606671016541" />
-    <state width="1638" height="145" key="GridCell.Tab.3.bottom" timestamp="1606671016543">
+    <state width="1638" height="246" key="GridCell.Tab.2.right/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606857803030" />
+    <state width="1638" height="246" key="GridCell.Tab.3.bottom" timestamp="1606857803033">
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
-    <state width="1638" height="145" key="GridCell.Tab.3.bottom/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606671016543" />
-    <state width="1638" height="145" key="GridCell.Tab.3.center" timestamp="1606671016542">
+    <state width="1638" height="246" key="GridCell.Tab.3.bottom/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606857803033" />
+    <state width="1638" height="246" key="GridCell.Tab.3.center" timestamp="1606857803032">
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
-    <state width="1638" height="145" key="GridCell.Tab.3.center/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606671016542" />
-    <state width="1638" height="145" key="GridCell.Tab.3.left" timestamp="1606671016542">
+    <state width="1638" height="246" key="GridCell.Tab.3.center/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606857803032" />
+    <state width="1638" height="246" key="GridCell.Tab.3.left" timestamp="1606857803031">
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
-    <state width="1638" height="145" key="GridCell.Tab.3.left/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606671016542" />
-    <state width="1638" height="145" key="GridCell.Tab.3.right" timestamp="1606671016542">
+    <state width="1638" height="246" key="GridCell.Tab.3.left/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606857803031" />
+    <state width="1638" height="246" key="GridCell.Tab.3.right" timestamp="1606857803032">
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
-    <state width="1638" height="145" key="GridCell.Tab.3.right/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606671016542" />
-    <state width="1638" height="145" key="GridCell.Tab.4.bottom" timestamp="1606671016544">
+    <state width="1638" height="246" key="GridCell.Tab.3.right/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606857803032" />
+    <state width="1638" height="246" key="GridCell.Tab.4.bottom" timestamp="1606857803034">
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
-    <state width="1638" height="145" key="GridCell.Tab.4.bottom/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606671016544" />
-    <state width="1638" height="145" key="GridCell.Tab.4.center" timestamp="1606671016543">
+    <state width="1638" height="246" key="GridCell.Tab.4.bottom/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606857803034" />
+    <state width="1638" height="246" key="GridCell.Tab.4.center" timestamp="1606857803034">
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
-    <state width="1638" height="145" key="GridCell.Tab.4.center/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606671016543" />
-    <state width="1638" height="145" key="GridCell.Tab.4.left" timestamp="1606671016543">
+    <state width="1638" height="246" key="GridCell.Tab.4.center/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606857803034" />
+    <state width="1638" height="246" key="GridCell.Tab.4.left" timestamp="1606857803033">
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
-    <state width="1638" height="145" key="GridCell.Tab.4.left/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606671016543" />
-    <state width="1638" height="145" key="GridCell.Tab.4.right" timestamp="1606671016544">
+    <state width="1638" height="246" key="GridCell.Tab.4.left/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606857803033" />
+    <state width="1638" height="246" key="GridCell.Tab.4.right" timestamp="1606857803034">
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
-    <state width="1638" height="145" key="GridCell.Tab.4.right/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606671016544" />
+    <state width="1638" height="246" key="GridCell.Tab.4.right/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606857803034" />
     <state width="237" height="455" key="HiddenNamespacesPopup" timestamp="1606662505424">
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
@@ -324,6 +299,34 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/MongoFS/Pages/Drive.razor</url>
+          <line>107</line>
+          <properties documentPath="$PROJECT_DIR$/MongoFS/Pages/Drive.razor" initialLine="107" isMultiMethodBreakpoint="true">
+            <option name="multiMethodBreakpoint" value="true" />
+            <startOffsets>
+              <option value="-1" />
+            </startOffsets>
+            <endOffsets>
+              <option value="-1" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/MongoFS/Pages/Drive.razor</url>
+          <line>130</line>
+          <properties documentPath="$PROJECT_DIR$/MongoFS/Pages/Drive.razor" initialLine="130" isMultiMethodBreakpoint="true">
+            <option name="multiMethodBreakpoint" value="true" />
+            <startOffsets>
+              <option value="-1" />
+            </startOffsets>
+            <endOffsets>
+              <option value="-1" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
