@@ -1,12 +1,21 @@
 @page "/file/{fileId}"
 @using MongoDB.Bson
 @inject MongoService _ms;
+@inject IJSRuntime jsRuntime;
 
 <h3>FileDetail</h3>
 
 @if (file != null)
 {
     @file.Name
+
+    <span>Type:</span>
+    <input placeholder="Type" @bind="file.Type"/>
+
+    <span>Content:</span>
+    <textarea @bind="file.Content"></textarea>
+
+    <button @onclick="async () => { await this.Save(); }">Save</button>
 }
 else
 {
@@ -25,6 +34,12 @@ else
     {
         if (ObjectId.TryParse(this.FileId, out ObjectId id))
             file = await this._ms.GetFile(id);
+    }
+
+    private async Task Save()
+    {
+        await this._ms.UpdateFile(file);
+        await this.jsRuntime.InvokeVoidAsync("BackUrl");
     }
 
 }

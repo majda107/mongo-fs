@@ -35,6 +35,10 @@
 window.ChangeUrl = function(url){
     history.pushState(null, '', url);   
 }
+
+window.BackUrl = function () {
+    history.back();
+}
 </script>
 </body>
 </html>

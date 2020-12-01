@@ -85,6 +85,11 @@ namespace MongoFS.Services
             return res;
         }
 
+        public async Task UpdateFile(FileModel file)
+        {
+            await this._database.GetCollection<FileModel>(FILES).ReplaceOneAsync(f => f.Id == file.Id, file);
+        }
+
 
         // TODO register to parent folder (children)
         public async Task CreateFolder(ObjectId drive, ObjectId parent, string name)
