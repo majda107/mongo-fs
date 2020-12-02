@@ -34,7 +34,10 @@
         }
         @foreach (var file in files)
         {
-            <li @onclick='() => { this._nav.NavigateTo($"/file/{file.Id}"); }'>[@file.Name] | @(file.Content?.Length ?? 0)GB</li>
+            <li >
+                <span @onclick='() => { this._nav.NavigateTo($"/file/{file.Id}"); }'>[@file.Name] | @(file.Content?.Length ?? 0)GB</span>
+                <button @onclick='async () => { await this._ms.DeleteFile(file.Id); await this.RefreshFolders(); }'>X</button>
+            </li>
         }
     </ul>
 

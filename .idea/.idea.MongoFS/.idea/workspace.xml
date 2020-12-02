@@ -19,10 +19,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e62b2a5d-5511-473c-9c71-a5a5437d407a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MongoFS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MongoFS/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MongoFS/Models/FolderModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MongoFS/Models/FolderModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MongoFS/Pages/Drive.razor" beforeDir="false" afterPath="$PROJECT_DIR$/MongoFS/Pages/Drive.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MongoFS/Pages/Drives.razor" beforeDir="false" afterPath="$PROJECT_DIR$/MongoFS/Pages/Drives.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MongoFS/Models/DriveModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MongoFS/Models/DriveModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MongoFS/Services/MongoService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MongoFS/Services/MongoService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,7 +40,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/MongoFS/Models/DriveModel.cs" />
         <option value="$PROJECT_DIR$/MongoFS/Pages/Drives.cshtml" />
         <option value="$PROJECT_DIR$/MongoFS/_Imports.razor" />
         <option value="$PROJECT_DIR$/MongoFS/Style/style.scss" />
@@ -55,10 +51,11 @@
         <option value="$PROJECT_DIR$/MongoFS/Pages/_Host.cshtml" />
         <option value="$PROJECT_DIR$/MongoFS/Pages/FileDetail.razor" />
         <option value="$PROJECT_DIR$/MongoFS/Startup.cs" />
-        <option value="$PROJECT_DIR$/MongoFS/Pages/Drives.razor" />
         <option value="$PROJECT_DIR$/MongoFS/Models/FolderModel.cs" />
-        <option value="$PROJECT_DIR$/MongoFS/Services/MongoService.cs" />
         <option value="$PROJECT_DIR$/MongoFS/Pages/Drive.razor" />
+        <option value="$PROJECT_DIR$/MongoFS/Pages/Drives.razor" />
+        <option value="$PROJECT_DIR$/MongoFS/Models/DriveModel.cs" />
+        <option value="$PROJECT_DIR$/MongoFS/Services/MongoService.cs" />
       </list>
     </option>
   </component>
@@ -137,7 +134,7 @@
       <workItem from="1606855250749" duration="2980000" />
       <workItem from="1606902854127" duration="571000" />
       <workItem from="1606917059808" duration="2219000" />
-      <workItem from="1606929824847" duration="2010000" />
+      <workItem from="1606929824847" duration="2635000" />
     </task>
     <servers />
   </component>
@@ -179,105 +176,105 @@
       <screen x="0" y="25" width="2560" height="1337" />
     </state>
     <state x="1218" y="467" width="1063" height="671" key="EditFileWatcherDialog/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606658157899" />
-    <state width="1638" height="225" key="GridCell.Tab.0.bottom" timestamp="1606931645661">
+    <state width="1638" height="225" key="GridCell.Tab.0.bottom" timestamp="1606932093229">
       <screen x="0" y="25" width="1680" height="947" />
     </state>
-    <state width="1638" height="225" key="GridCell.Tab.0.bottom/0.25.1680.947@0.25.1680.947" timestamp="1606931645661" />
+    <state width="1638" height="225" key="GridCell.Tab.0.bottom/0.25.1680.947@0.25.1680.947" timestamp="1606932093229" />
     <state width="1638" height="246" key="GridCell.Tab.0.bottom/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606859953331" />
-    <state width="1638" height="225" key="GridCell.Tab.0.center" timestamp="1606931645660">
+    <state width="1638" height="225" key="GridCell.Tab.0.center" timestamp="1606932093228">
       <screen x="0" y="25" width="1680" height="947" />
     </state>
-    <state width="1638" height="225" key="GridCell.Tab.0.center/0.25.1680.947@0.25.1680.947" timestamp="1606931645660" />
+    <state width="1638" height="225" key="GridCell.Tab.0.center/0.25.1680.947@0.25.1680.947" timestamp="1606932093228" />
     <state width="1638" height="246" key="GridCell.Tab.0.center/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606859953330" />
-    <state width="1638" height="225" key="GridCell.Tab.0.left" timestamp="1606931645659">
+    <state width="1638" height="225" key="GridCell.Tab.0.left" timestamp="1606932093227">
       <screen x="0" y="25" width="1680" height="947" />
     </state>
-    <state width="1638" height="225" key="GridCell.Tab.0.left/0.25.1680.947@0.25.1680.947" timestamp="1606931645659" />
+    <state width="1638" height="225" key="GridCell.Tab.0.left/0.25.1680.947@0.25.1680.947" timestamp="1606932093227" />
     <state width="1638" height="246" key="GridCell.Tab.0.left/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606859953329" />
-    <state width="1638" height="225" key="GridCell.Tab.0.right" timestamp="1606931645660">
+    <state width="1638" height="225" key="GridCell.Tab.0.right" timestamp="1606932093228">
       <screen x="0" y="25" width="1680" height="947" />
     </state>
-    <state width="1638" height="225" key="GridCell.Tab.0.right/0.25.1680.947@0.25.1680.947" timestamp="1606931645660" />
+    <state width="1638" height="225" key="GridCell.Tab.0.right/0.25.1680.947@0.25.1680.947" timestamp="1606932093228" />
     <state width="1638" height="246" key="GridCell.Tab.0.right/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606859953331" />
-    <state width="1638" height="225" key="GridCell.Tab.1.bottom" timestamp="1606931684988">
+    <state width="1638" height="225" key="GridCell.Tab.1.bottom" timestamp="1606932093231">
       <screen x="0" y="25" width="1680" height="947" />
     </state>
-    <state width="1638" height="225" key="GridCell.Tab.1.bottom/0.25.1680.947@0.25.1680.947" timestamp="1606931684988" />
+    <state width="1638" height="225" key="GridCell.Tab.1.bottom/0.25.1680.947@0.25.1680.947" timestamp="1606932093231" />
     <state width="1638" height="246" key="GridCell.Tab.1.bottom/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606859953333" />
-    <state width="1638" height="225" key="GridCell.Tab.1.center" timestamp="1606931684987">
+    <state width="1638" height="225" key="GridCell.Tab.1.center" timestamp="1606932093230">
       <screen x="0" y="25" width="1680" height="947" />
     </state>
-    <state width="1638" height="225" key="GridCell.Tab.1.center/0.25.1680.947@0.25.1680.947" timestamp="1606931684987" />
+    <state width="1638" height="225" key="GridCell.Tab.1.center/0.25.1680.947@0.25.1680.947" timestamp="1606932093230" />
     <state width="1638" height="246" key="GridCell.Tab.1.center/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606859953332" />
-    <state width="1638" height="225" key="GridCell.Tab.1.left" timestamp="1606931684986">
+    <state width="1638" height="225" key="GridCell.Tab.1.left" timestamp="1606932093229">
       <screen x="0" y="25" width="1680" height="947" />
     </state>
-    <state width="1638" height="225" key="GridCell.Tab.1.left/0.25.1680.947@0.25.1680.947" timestamp="1606931684986" />
+    <state width="1638" height="225" key="GridCell.Tab.1.left/0.25.1680.947@0.25.1680.947" timestamp="1606932093229" />
     <state width="1638" height="246" key="GridCell.Tab.1.left/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606859953332" />
-    <state width="1638" height="225" key="GridCell.Tab.1.right" timestamp="1606931684987">
+    <state width="1638" height="225" key="GridCell.Tab.1.right" timestamp="1606932093230">
       <screen x="0" y="25" width="1680" height="947" />
     </state>
-    <state width="1638" height="225" key="GridCell.Tab.1.right/0.25.1680.947@0.25.1680.947" timestamp="1606931684987" />
+    <state width="1638" height="225" key="GridCell.Tab.1.right/0.25.1680.947@0.25.1680.947" timestamp="1606932093230" />
     <state width="1638" height="246" key="GridCell.Tab.1.right/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606859953333" />
-    <state width="1638" height="225" key="GridCell.Tab.2.bottom" timestamp="1606931645418">
+    <state width="1638" height="225" key="GridCell.Tab.2.bottom" timestamp="1606932093232">
       <screen x="0" y="25" width="1680" height="947" />
     </state>
-    <state width="1638" height="225" key="GridCell.Tab.2.bottom/0.25.1680.947@0.25.1680.947" timestamp="1606931645418" />
+    <state width="1638" height="225" key="GridCell.Tab.2.bottom/0.25.1680.947@0.25.1680.947" timestamp="1606932093232" />
     <state width="1638" height="246" key="GridCell.Tab.2.bottom/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606859953334" />
-    <state width="1638" height="225" key="GridCell.Tab.2.center" timestamp="1606931645417">
+    <state width="1638" height="225" key="GridCell.Tab.2.center" timestamp="1606932093231">
       <screen x="0" y="25" width="1680" height="947" />
     </state>
-    <state width="1638" height="225" key="GridCell.Tab.2.center/0.25.1680.947@0.25.1680.947" timestamp="1606931645417" />
+    <state width="1638" height="225" key="GridCell.Tab.2.center/0.25.1680.947@0.25.1680.947" timestamp="1606932093231" />
     <state width="1638" height="246" key="GridCell.Tab.2.center/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606859953333" />
-    <state width="1638" height="225" key="GridCell.Tab.2.left" timestamp="1606931645417">
+    <state width="1638" height="225" key="GridCell.Tab.2.left" timestamp="1606932093231">
       <screen x="0" y="25" width="1680" height="947" />
     </state>
-    <state width="1638" height="225" key="GridCell.Tab.2.left/0.25.1680.947@0.25.1680.947" timestamp="1606931645417" />
+    <state width="1638" height="225" key="GridCell.Tab.2.left/0.25.1680.947@0.25.1680.947" timestamp="1606932093231" />
     <state width="1638" height="246" key="GridCell.Tab.2.left/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606859953333" />
-    <state width="1638" height="225" key="GridCell.Tab.2.right" timestamp="1606931645418">
+    <state width="1638" height="225" key="GridCell.Tab.2.right" timestamp="1606932093232">
       <screen x="0" y="25" width="1680" height="947" />
     </state>
-    <state width="1638" height="225" key="GridCell.Tab.2.right/0.25.1680.947@0.25.1680.947" timestamp="1606931645418" />
+    <state width="1638" height="225" key="GridCell.Tab.2.right/0.25.1680.947@0.25.1680.947" timestamp="1606932093232" />
     <state width="1638" height="246" key="GridCell.Tab.2.right/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606859953334" />
-    <state width="1638" height="225" key="GridCell.Tab.3.bottom" timestamp="1606931645419">
+    <state width="1638" height="225" key="GridCell.Tab.3.bottom" timestamp="1606932093234">
       <screen x="0" y="25" width="1680" height="947" />
     </state>
-    <state width="1638" height="225" key="GridCell.Tab.3.bottom/0.25.1680.947@0.25.1680.947" timestamp="1606931645419" />
+    <state width="1638" height="225" key="GridCell.Tab.3.bottom/0.25.1680.947@0.25.1680.947" timestamp="1606932093234" />
     <state width="1638" height="246" key="GridCell.Tab.3.bottom/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606859953335" />
-    <state width="1638" height="225" key="GridCell.Tab.3.center" timestamp="1606931645419">
+    <state width="1638" height="225" key="GridCell.Tab.3.center" timestamp="1606932093233">
       <screen x="0" y="25" width="1680" height="947" />
     </state>
-    <state width="1638" height="225" key="GridCell.Tab.3.center/0.25.1680.947@0.25.1680.947" timestamp="1606931645419" />
+    <state width="1638" height="225" key="GridCell.Tab.3.center/0.25.1680.947@0.25.1680.947" timestamp="1606932093233" />
     <state width="1638" height="246" key="GridCell.Tab.3.center/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606859953334" />
-    <state width="1638" height="225" key="GridCell.Tab.3.left" timestamp="1606931645418">
+    <state width="1638" height="225" key="GridCell.Tab.3.left" timestamp="1606932093233">
       <screen x="0" y="25" width="1680" height="947" />
     </state>
-    <state width="1638" height="225" key="GridCell.Tab.3.left/0.25.1680.947@0.25.1680.947" timestamp="1606931645418" />
+    <state width="1638" height="225" key="GridCell.Tab.3.left/0.25.1680.947@0.25.1680.947" timestamp="1606932093233" />
     <state width="1638" height="246" key="GridCell.Tab.3.left/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606859953334" />
-    <state width="1638" height="225" key="GridCell.Tab.3.right" timestamp="1606931645419">
+    <state width="1638" height="225" key="GridCell.Tab.3.right" timestamp="1606932093234">
       <screen x="0" y="25" width="1680" height="947" />
     </state>
-    <state width="1638" height="225" key="GridCell.Tab.3.right/0.25.1680.947@0.25.1680.947" timestamp="1606931645419" />
+    <state width="1638" height="225" key="GridCell.Tab.3.right/0.25.1680.947@0.25.1680.947" timestamp="1606932093234" />
     <state width="1638" height="246" key="GridCell.Tab.3.right/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606859953334" />
-    <state width="1638" height="225" key="GridCell.Tab.4.bottom" timestamp="1606931645421">
+    <state width="1638" height="225" key="GridCell.Tab.4.bottom" timestamp="1606932093237">
       <screen x="0" y="25" width="1680" height="947" />
     </state>
-    <state width="1638" height="225" key="GridCell.Tab.4.bottom/0.25.1680.947@0.25.1680.947" timestamp="1606931645421" />
+    <state width="1638" height="225" key="GridCell.Tab.4.bottom/0.25.1680.947@0.25.1680.947" timestamp="1606932093237" />
     <state width="1638" height="246" key="GridCell.Tab.4.bottom/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606859953336" />
-    <state width="1638" height="225" key="GridCell.Tab.4.center" timestamp="1606931645420">
+    <state width="1638" height="225" key="GridCell.Tab.4.center" timestamp="1606932093235">
       <screen x="0" y="25" width="1680" height="947" />
     </state>
-    <state width="1638" height="225" key="GridCell.Tab.4.center/0.25.1680.947@0.25.1680.947" timestamp="1606931645420" />
+    <state width="1638" height="225" key="GridCell.Tab.4.center/0.25.1680.947@0.25.1680.947" timestamp="1606932093235" />
     <state width="1638" height="246" key="GridCell.Tab.4.center/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606859953335" />
-    <state width="1638" height="225" key="GridCell.Tab.4.left" timestamp="1606931645420">
+    <state width="1638" height="225" key="GridCell.Tab.4.left" timestamp="1606932093235">
       <screen x="0" y="25" width="1680" height="947" />
     </state>
-    <state width="1638" height="225" key="GridCell.Tab.4.left/0.25.1680.947@0.25.1680.947" timestamp="1606931645420" />
+    <state width="1638" height="225" key="GridCell.Tab.4.left/0.25.1680.947@0.25.1680.947" timestamp="1606932093235" />
     <state width="1638" height="246" key="GridCell.Tab.4.left/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606859953335" />
-    <state width="1638" height="225" key="GridCell.Tab.4.right" timestamp="1606931645420">
+    <state width="1638" height="225" key="GridCell.Tab.4.right" timestamp="1606932093236">
       <screen x="0" y="25" width="1680" height="947" />
     </state>
-    <state width="1638" height="225" key="GridCell.Tab.4.right/0.25.1680.947@0.25.1680.947" timestamp="1606931645420" />
+    <state width="1638" height="225" key="GridCell.Tab.4.right/0.25.1680.947@0.25.1680.947" timestamp="1606932093236" />
     <state width="1638" height="246" key="GridCell.Tab.4.right/0.25.2560.1337/2560.322.1680.1025@0.25.2560.1337" timestamp="1606859953335" />
     <state width="237" height="455" key="HiddenNamespacesPopup" timestamp="1606662505424">
       <screen x="0" y="25" width="2560" height="1337" />
@@ -320,19 +317,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/MongoFS/Services/MongoService.cs</url>
-          <line>95</line>
-          <properties documentPath="$PROJECT_DIR$/MongoFS/Services/MongoService.cs" initialLine="95">
-            <startOffsets>
-              <option value="3220" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3281" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

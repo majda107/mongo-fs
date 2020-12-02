@@ -45,11 +45,24 @@ namespace MongoFS.Services
                 .FirstOrDefault();
         }
 
+        // DELETION
         public async Task DeleteDrive(ObjectId drive)
         {
             await this._database.GetCollection<FileModel>(FILES).DeleteManyAsync(f => f.DriveId == drive);
             await this._database.GetCollection<FolderModel>(FOLDERS).DeleteManyAsync(f => f.DriveId == drive);
             await this._database.GetCollection<DriveModel>(DRIVE).DeleteOneAsync(d => d.Id == drive);
+        }
+
+        // DELETE FILE
+        public async Task DeleteFile(ObjectId file)
+        {
+            var f = this._database.GetCollection<FileModel>(FILES).AsQueryable()
+                .FirstOrDefault(f => f.Id == file);
+
+            if (f == null) throw new Exception();
+
+            await this._database.GetCollection<FileModel>(FILES).DeleteOneAsync(f => f.Id == file);
+            await this.UpdateFolderSize(f.FolderId, -f.Content.Length);
         }
 
         public async Task<IList<FolderModel>> GetFolders(ObjectId drive, ObjectId parent)
@@ -137,6 +150,8 @@ namespace MongoFS.Services
             // this._database.GetCollection<FolderModel>(FOLDERS).AsQueryable().Where(f => f.)
         }
 
+
+        // SIZE UPDATING
         public async Task UpdateFolderSize(ObjectId folder, int inc)
         {
             await this._database.GetCollection<FolderModel>(FOLDERS).UpdateOneAsync(fi => fi.Id == folder,
@@ -146,6 +161,13 @@ namespace MongoFS.Services
                 .FirstOrDefault(f => f.Id == folder);
 
             if (f != null && f.ParentId != ObjectId.Empty) await this.UpdateFolderSize(f.ParentId, inc);
+            else if (f != null && f.ParentId == ObjectId.Empty) await this.UpdateDriveSize(folder, inc);
+        }
+
+        public async Task UpdateDriveSize(ObjectId drive, int inc)
+        {
+            await this._database.GetCollection<DriveModel>(DRIVE).UpdateOneAsync(d => d.Id == drive,
+                Builders<DriveModel>.Update.Inc(d => d.Taken, inc));
         }
 
 

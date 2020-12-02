@@ -10,5 +10,6 @@ namespace MongoFS.Models
         public string Name { get; set; }
 
         public int Capacity { get; set; }
+        public int Taken { get; set; }
     }
 }
