@@ -30,11 +30,11 @@
     <ul>
         @foreach (var folder in folders)
         {
-            <li @onclick="async () => { await EnterFolder(folder); }">@folder.Name</li>
+            <li @onclick="async () => { await EnterFolder(folder); }">@folder.Name | @(folder.Size)GB</li>
         }
         @foreach (var file in files)
         {
-            <li @onclick='() => { this._nav.NavigateTo($"/file/{file.Id}"); }'>[@file.Name]</li>
+            <li @onclick='() => { this._nav.NavigateTo($"/file/{file.Id}"); }'>[@file.Name] | @(file.Content?.Length ?? 0)GB</li>
         }
     </ul>
 
@@ -114,7 +114,7 @@ else
 
     private async Task CreateFolder()
     {
-        await this._ms.CreateFolder(this.drive.Id, this.parent.Id, this.newName);
+        await this._ms.CreateFolder(this.drive.Id, this.parent?.Id ?? ObjectId.Empty, this.newName);
         await this.RefreshFolders();
         this.newName = "";
     }
@@ -141,9 +141,9 @@ else
     // if (this.path.Count <= 0) return;
 
     // this.path.Pop();
-        
-        if(this.parent == null) return;
-        
+
+        if (this.parent == null) return;
+
         this.parent = await this._ms.GetDriveFolder(this.drive.Id, this.parent.ParentId);
         await this.RefreshFolders();
     }

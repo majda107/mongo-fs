@@ -7,7 +7,9 @@
 <ul>
     @foreach (var drive in this._ms.GetDrives())
     {
-        <li @onclick='() => { this._nav.NavigateTo($"/drives/{drive.Id.ToString()}"); }'>@drive.Name | @(drive.Capacity)GB <button @onclick="() => { this._ms.RemoveDrive(drive.Id); }">X</button></li>
+        <li >
+            <span @onclick='() => { this._nav.NavigateTo($"/drives/{drive.Id.ToString()}"); }'>@drive.Name | @(drive.Capacity)GB</span> <button @onclick="async () => { await this._ms.DeleteDrive(drive.Id); }">X</button>
+        </li>
     }
 </ul>
 

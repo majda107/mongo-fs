@@ -38,16 +38,18 @@ namespace MongoFS.Services
             this._database.GetCollection<DriveModel>(DRIVE).InsertOne(drive);
         }
 
-        public void RemoveDrive(ObjectId id)
-        {
-            this._database.GetCollection<DriveModel>(DRIVE).DeleteOne(f => f.Id == id);
-        }
-
 
         public async Task<DriveModel> GetDrive(ObjectId drive)
         {
             return (await this._database.GetCollection<DriveModel>(DRIVE).FindAsync(f => f.Id == drive))
                 .FirstOrDefault();
+        }
+
+        public async Task DeleteDrive(ObjectId drive)
+        {
+            await this._database.GetCollection<FileModel>(FILES).DeleteManyAsync(f => f.DriveId == drive);
+            await this._database.GetCollection<FolderModel>(FOLDERS).DeleteManyAsync(f => f.DriveId == drive);
+            await this._database.GetCollection<DriveModel>(DRIVE).DeleteOneAsync(d => d.Id == drive);
         }
 
         public async Task<IList<FolderModel>> GetFolders(ObjectId drive, ObjectId parent)
@@ -87,73 +89,106 @@ namespace MongoFS.Services
 
         public async Task UpdateFile(FileModel file)
         {
+            var current = this._database.GetCollection<FileModel>(FILES).AsQueryable()
+                .FirstOrDefault(f => f.Id == file.Id);
+            if (current == null) return;
+
+            var inc = file.Content.Length - (current.Content?.Length ?? 0);
+
             await this._database.GetCollection<FileModel>(FILES).ReplaceOneAsync(f => f.Id == file.Id, file);
+
+            // UPDATE FOLDER SIZE CASCADE
+            await this.UpdateFolderSize(file.FolderId, inc);
         }
 
 
         // TODO register to parent folder (children)
         public async Task CreateFolder(ObjectId drive, ObjectId parent, string name)
         {
+            var id = ObjectId.GenerateNewId();
             await this._database.GetCollection<FolderModel>(FOLDERS).InsertOneAsync(new FolderModel()
             {
+                Id = id,
                 Name = name,
                 ParentId = parent,
                 DriveId = drive
             });
+
+            await this._database.GetCollection<FolderModel>(FOLDERS)
+                .UpdateOneAsync(f => f.Id == parent,
+                    Builders<FolderModel>.Update.Push(f => f.Folders, id));
         }
 
 
         public async Task CreateFile(ObjectId drive, ObjectId folder, string name)
         {
+            var id = ObjectId.GenerateNewId();
             await this._database.GetCollection<FileModel>(FILES).InsertOneAsync(new FileModel()
             {
+                Id = id,
                 DriveId = drive,
                 FolderId = folder,
                 Name = name
             });
+
+            await this._database.GetCollection<FolderModel>(FOLDERS).UpdateOneAsync(f => f.Id == folder,
+                Builders<FolderModel>.Update.Push(f => f.Files, id));
+
+            // this._database.GetCollection<FolderModel>(FOLDERS).AsQueryable().Where(f => f.)
+        }
+
+        public async Task UpdateFolderSize(ObjectId folder, int inc)
+        {
+            await this._database.GetCollection<FolderModel>(FOLDERS).UpdateOneAsync(fi => fi.Id == folder,
+                Builders<FolderModel>.Update.Inc(f => f.Size, inc));
+
+            var f = this._database.GetCollection<FolderModel>(FOLDERS).AsQueryable()
+                .FirstOrDefault(f => f.Id == folder);
+
+            if (f != null && f.ParentId != ObjectId.Empty) await this.UpdateFolderSize(f.ParentId, inc);
         }
 
 
         public async Task CreateFolderPath(ObjectId driveId, string path)
         {
-            // REMOVE STARTING \ 
-            if (path.StartsWith(Path.PathSeparator)) path = path.Substring(1, path.Length - 1);
-
-
-            var split = path.Split(Path.PathSeparator);
-            if (split.Length <= 0) return;
-
-            var folders = this._database.GetCollection<FolderModel>(FOLDERS);
-            // var rootPath = split.First();
+            // // REMOVE STARTING \ 
+            // if (path.StartsWith(Path.PathSeparator)) path = path.Substring(1, path.Length - 1);
             //
             //
-            // var root = folders.Find(f => f.ParentId == ObjectId.Empty && f.Name == rootPath && f.DriveId == driveId)
-            //     .FirstOrDefault();
-            // if (root == null)
+            // var split = path.Split(Path.PathSeparator);
+            // if (split.Length <= 0) return;
+            //
+            // var folders = this._database.GetCollection<FolderModel>(FOLDERS);
+            // // var rootPath = split.First();
+            // //
+            // //
+            // // var root = folders.Find(f => f.ParentId == ObjectId.Empty && f.Name == rootPath && f.DriveId == driveId)
+            // //     .FirstOrDefault();
+            // // if (root == null)
+            // // {
+            // //     root = new FolderModel {DriveId = driveId, Name = rootPath, ParentId = ObjectId.Empty};
+            // //     await folders.InsertOneAsync(root);
+            // // }
+            //
+            //
+            // FolderModel parent = null, entry = null;
+            // foreach (var folder in split)
             // {
-            //     root = new FolderModel {DriveId = driveId, Name = rootPath, ParentId = ObjectId.Empty};
-            //     await folders.InsertOneAsync(root);
+            //     if (parent == null || parent.Children.ContainsKey(folder))
+            //     {
+            //         entry = (await folders.FindAsync(f =>
+            //             f.ParentId == (parent == null ? ObjectId.Empty : parent.Id) && f.DriveId == driveId &&
+            //             f.Name == folder)).FirstOrDefault();
+            //     }
+            //     else
+            //     {
+            //         entry = new FolderModel
+            //             {ParentId = parent?.Id ?? ObjectId.Empty, Name = folder, DriveId = driveId};
+            //         await folders.InsertOneAsync(entry);
+            //     }
+            //
+            //     parent = entry;
             // }
-
-
-            FolderModel parent = null, entry = null;
-            foreach (var folder in split)
-            {
-                if (parent == null || parent.Children.ContainsKey(folder))
-                {
-                    entry = (await folders.FindAsync(f =>
-                        f.ParentId == (parent == null ? ObjectId.Empty : parent.Id) && f.DriveId == driveId &&
-                        f.Name == folder)).FirstOrDefault();
-                }
-                else
-                {
-                    entry = new FolderModel
-                        {ParentId = parent?.Id ?? ObjectId.Empty, Name = folder, DriveId = driveId};
-                    await folders.InsertOneAsync(entry);
-                }
-
-                parent = entry;
-            }
         }
     }
 }
