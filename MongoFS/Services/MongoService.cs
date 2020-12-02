@@ -54,15 +54,58 @@ namespace MongoFS.Services
         }
 
         // DELETE FILE
-        public async Task DeleteFile(ObjectId file)
+        public async Task DeleteFile(ObjectId fileId)
         {
-            var f = this._database.GetCollection<FileModel>(FILES).AsQueryable()
-                .FirstOrDefault(f => f.Id == file);
+            var file = this._database.GetCollection<FileModel>(FILES).AsQueryable()
+                .FirstOrDefault(f => f.Id == fileId);
 
-            if (f == null) throw new Exception();
+            if (file == null) throw new Exception();
 
-            await this._database.GetCollection<FileModel>(FILES).DeleteOneAsync(f => f.Id == file);
-            await this.UpdateFolderSize(f.FolderId, -f.Content.Length);
+            await this._database.GetCollection<FileModel>(FILES).DeleteOneAsync(f => f.Id == fileId);
+            await this.UpdateFolderSize(file.FolderId, -file.Content.Length);
+
+
+            await this._database.GetCollection<FolderModel>(FOLDERS).UpdateOneAsync(f => f.Id == file.FolderId,
+                Builders<FolderModel>.Update.Pull(u => u.Files, fileId));
+        }
+
+        public async Task DeleteFolder(ObjectId folderId)
+        {
+            var folder = this._database.GetCollection<FolderModel>(FOLDERS).AsQueryable()
+                .FirstOrDefault(f => f.Id == folderId);
+
+            if (folder == null) return;
+
+            // await Task.WhenAll(folder.Folders.Select(async f => await this.cascadeFolderDelete(f)));
+            // await Task.WhenAll(folder.Files.Select(async f => await this.cascadeFolderDelete(f)));
+            //
+            //
+            // await this._database.GetCollection<FolderModel>(FOLDERS)
+            //     .DeleteManyAsync(f => folder.Folders.Contains(f.Id));
+            // await this._database.GetCollection<FileModel>(FILES).DeleteManyAsync(f => folder.Files.Contains(f.Id));
+            await this.cascadeFolderDelete(folderId);
+
+
+            await this._database.GetCollection<FolderModel>(FOLDERS).UpdateOneAsync(f => f.Id == folder.ParentId,
+                Builders<FolderModel>.Update.Pull(f => f.Folders, folderId));
+
+            await this._database.GetCollection<FolderModel>(FOLDERS).DeleteOneAsync(f => f.Id == folderId);
+            await this.UpdateFolderSize(folder.ParentId, -folder.Size);
+        }
+
+        // DIRTY WAY TO DELETE FOLDER
+        private async Task cascadeFolderDelete(ObjectId folderId)
+        {
+            var folder = this._database.GetCollection<FolderModel>(FOLDERS).AsQueryable()
+                .FirstOrDefault(f => f.Id == folderId);
+
+            if (folder == null) return;
+            await Task.WhenAll(folder.Folders.Select(async f => await this.cascadeFolderDelete(f)));
+            await Task.WhenAll(folder.Files.Select(async f => await this.cascadeFolderDelete(f)));
+
+            await this._database.GetCollection<FolderModel>(FOLDERS)
+                .DeleteManyAsync(f => folder.Folders.Contains(f.Id));
+            await this._database.GetCollection<FileModel>(FILES).DeleteManyAsync(f => folder.Files.Contains(f.Id));
         }
 
         public async Task<IList<FolderModel>> GetFolders(ObjectId drive, ObjectId parent)

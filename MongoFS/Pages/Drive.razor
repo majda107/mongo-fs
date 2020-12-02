@@ -30,7 +30,10 @@
     <ul>
         @foreach (var folder in folders)
         {
-            <li @onclick="async () => { await EnterFolder(folder); }">@folder.Name | @(folder.Size)GB</li>
+            <li >
+                <span @onclick="async () => { await EnterFolder(folder); }">@folder.Name | @(folder.Size)GB</span>
+                <button @onclick='async () => { await this._ms.DeleteFolder(folder.Id); await this.RefreshFolders(); }'>X</button>
+            </li>
         }
         @foreach (var file in files)
         {
