@@ -204,7 +204,7 @@ namespace MongoFS.Services
                 .FirstOrDefault(f => f.Id == folder);
 
             if (f != null && f.ParentId != ObjectId.Empty) await this.UpdateFolderSize(f.ParentId, inc);
-            else if (f != null && f.ParentId == ObjectId.Empty) await this.UpdateDriveSize(folder, inc);
+            else if (f != null && f.ParentId == ObjectId.Empty) await this.UpdateDriveSize(f.DriveId, inc);
         }
 
         public async Task UpdateDriveSize(ObjectId drive, int inc)

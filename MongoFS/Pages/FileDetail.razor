@@ -13,7 +13,8 @@
     <input placeholder="Type" @bind="file.Type"/>
 
     <span>Content:</span>
-    <textarea @bind="file.Content"></textarea>
+@*     <textarea @bind="file.Content"></textarea> *@
+    <div id="monaco" style="width: 100%; height: 400px"></div>
 
     <button @onclick="async () => { await this.Save(); }">Save</button>
 }
@@ -36,8 +37,20 @@ else
             file = await this._ms.GetFile(id);
     }
 
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender) return;
+        await this.jsRuntime.InvokeVoidAsync("CreateEditor", "monaco", "html", this.file.Content);
+    }
+
     private async Task Save()
     {
+        var content = await this.jsRuntime.InvokeAsync<string>("GetEditorData");
+        Console.WriteLine(content);
+
+        this.file.Content = content;
+
         await this._ms.UpdateFile(file);
         await this.jsRuntime.InvokeVoidAsync("BackUrl");
     }
