@@ -1,6 +1,12 @@
 @import "./abstracts/variables";
 
-.test {
-  color: $primary-color;
-  background-color: blue;
+@import "./layout/main.scss";
+
+//.test {
+//  color: $primary-color;
+//  background-color: blue;
+//}
+
+* {
+  font-family: 'Quicksand', sans-serif;
 }

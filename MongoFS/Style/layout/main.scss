@@ -8,14 +8,9 @@ main {
 .mongofs-layout {
   max-width: 1200px;
   width: 100%;
+  
   display: grid;
   grid-template-columns: 310px 1fr;
   column-gap: 56px;
   row-gap: 46px;
 }
-
-* {
-  font-family: "Quicksand", sans-serif;
-}
-
-/*# sourceMappingURL=style.css.map */
