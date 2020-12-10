@@ -4,14 +4,14 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace MongoFS.Models
 {
-    public class FolderModel
+    public class FolderModel : IFileModel
     {
-        [BsonId] public ObjectId Id { get; set; }
+        // [BsonId] public ObjectId Id { get; set; }
 
 
         public ObjectId DriveId { get; set; }
 
-        public string Name { get; set; }
+        // public string Name { get; set; }
 
         public int Size { get; set; }
 

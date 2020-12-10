@@ -1,19 +1,30 @@
 <div class="drive data-grid">
-    
-    <span>Drive:</span>
-    <span>MajdaDrive</span>
-    
-    <span>Capacity:</span>
-    <span>500GB</span>
+    @if (this.Drive == null)
+    {
+        <span>No drive selected...</span>
+    }
+    else
+    {
+        <span>Drive:</span>
+        <span>@Drive.Name</span>
 
-    <span>Space:</span>
-    <span>220GB</span>
+        <span>Capacity:</span>
+        <span>@(Drive.Capacity.ToString())</span>
 
-    <span>Created:</span>
-    <span>2/12/2020 4:34PM</span>
+        <span>Space:</span>
+        <span>@((Drive.Capacity - Drive.Taken).ToString())</span>
+
+
+        <span>Created:</span>
+        <span>2/12/2020 4:34PM</span>
+    }
+
 
 </div>
 
 @code {
+
+    [Parameter]
+    public DriveModel Drive { get; set; }
 
 }

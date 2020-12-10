@@ -1,0 +1,19 @@
+@inject MongoService _ms;
+
+
+<ul>
+    @foreach (var drive in _ms.GetDrives())
+    {
+        <li @onclick="async () => { await this.Selected.InvokeAsync(drive); }">
+            <span>Drive: @drive.Name</span>
+            <span>@((drive.Capacity - drive.Taken).ToString())GB</span>
+        </li>
+    }
+</ul>
+
+@code {
+
+    [Parameter]
+    public EventCallback<DriveModel> Selected { get; set; }
+
+}

@@ -1,0 +1,61 @@
+@using MongoDB.Bson
+@inject MongoService _ms;
+
+<ul>
+    @*     @foreach (var f in IFiles) *@
+    @*     { *@
+    @*         <li>@f.Id.ToString()</li> *@
+    @*     } *@
+    <button @onclick="async () => { await UpFolder(); }">Up folder</button>
+
+    @foreach (var folder in this.folders)
+    {
+        <li @onclick="async () => { await ParentSelected.InvokeAsync(folder); }">@folder.Name</li>
+    }
+
+    @foreach (var file in this.files)
+    {
+        <li @onclick="async () => { await this.IFileSelected.InvokeAsync(file); }">[@file.Name]</li>
+    }
+</ul>
+
+@code {
+
+    // [Parameter]
+    // public IList<IFileModel> IFiles { get; set; } = new List<IFileModel>();
+
+    [Parameter]
+    public DriveModel Drive { get; set; }
+
+    [Parameter]
+    public FolderModel Parent { get; set; }
+
+
+    [Parameter]
+    public EventCallback<FolderModel> ParentSelected { get; set; }
+
+    [Parameter]
+    public EventCallback<IFileModel> IFileSelected { get; set; }
+
+
+    private IList<FolderModel> folders = new List<FolderModel>();
+    private IList<FileModel> files = new List<FileModel>();
+
+    public async Task UpFolder()
+    {
+        if (this.Parent == null) return;
+
+        var p = await this._ms.GetDriveFolder(this.Drive.Id, this.Parent.ParentId);
+        await this.ParentSelected.InvokeAsync(p);
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Console.WriteLine("Trying to retreive disk folders...");
+        if (this.Drive == null) return;
+
+        this.folders = await this._ms.GetFolders(this.Drive.Id, this.Parent?.Id ?? ObjectId.Empty);
+        this.files = await this._ms.GetFolderFiles(this.Drive.Id, this.Parent?.Id ?? ObjectId.Empty);
+    }
+
+}

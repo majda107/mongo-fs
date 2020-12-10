@@ -1,4 +1,5 @@
 ﻿@page "/"
+@inject MongoService _ms;
 
 <div class="mongofs-layout">
     <section class="mongofs-header">
@@ -16,18 +17,52 @@
     </section>
 
     <section class="drive">
-        <DriveDetail/>
+        <DriveDetail Drive="@this.drive"/>
     </section>
 
     <section class="drives">
-
+        <DrivesDetail Selected="@Selected"></DrivesDetail>
     </section>
 
     <section class="detail">
-        <IFileDetail/>
+        <IFileDetail IFile="@this.selected"/>
     </section>
-    
+
     <section class="files">
-        
+        <IFilesDetail Drive="@this.drive" Parent="@this.parent" ParentSelected="@ParentSelected" IFileSelected="@IFileSelected"/>
     </section>
 </div>
+
+@code {
+    //TODO implement route id's
+    // [Parameter]
+    // public string Id { get; set; }
+    //
+    // [Parameter]
+    // public string FolderId { get; set; }
+
+    private DriveModel drive = null;
+    private FolderModel parent = null;
+    private IFileModel selected = null;
+
+    private void Selected(DriveModel drive)
+    {
+        this.drive = drive;
+        Console.WriteLine($"Drive {drive.Name} selected!");
+        this.StateHasChanged();
+    }
+
+    private void ParentSelected(FolderModel parent)
+    {
+        this.parent = parent;
+        this.selected = parent;
+        this.StateHasChanged();
+    }
+
+    private void IFileSelected(IFileModel ifile)
+    {
+        this.selected = ifile;
+        this.StateHasChanged();
+    }
+
+}

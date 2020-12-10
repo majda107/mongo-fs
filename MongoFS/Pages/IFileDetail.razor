@@ -1,26 +1,36 @@
 <div class="detail">
-    <h3>/YourFolder</h3>
-    <img src="favicon.ico" width="72"/>
+    @if (this.IFile == null)
+    {
+        <span>No content selected...</span>
+    }
+    else
+    {
+        <h3>/@IFile.Name</h3>
+        <img src="favicon.ico" width="72"/>
 
-    <div class="data-grid">
+        <div class="data-grid">
 
-        <span>Drive:</span>
-        <span>MajdaDrive</span>
+            <span>Drive:</span>
+            <span>MajdaDrive</span>
 
-        <span>Capacity:</span>
-        <span>500GB</span>
+            <span>Capacity:</span>
+            <span>500GB</span>
 
-        <span>Space:</span>
-        <span>220GB</span>
+            <span>Space:</span>
+            <span>220GB</span>
 
-        <span>Created:</span>
-        <span>2/12/2020 4:34PM</span>
+            <span>Created:</span>
+            <span>2/12/2020 4:34PM</span>
 
-    </div>
-    
-    <button>Share</button>
+        </div>
+
+        <button>Share</button>
+    }
 </div>
 
 @code {
+
+    [Parameter]
+    public IFileModel IFile { get; set; }
 
 }
