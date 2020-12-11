@@ -1,23 +1,58 @@
 @using MongoDB.Bson
 @inject MongoService _ms;
+@inject NavigationManager _nav;
 
-<ul>
+<section class="files-detail">
     @*     @foreach (var f in IFiles) *@
     @*     { *@
     @*         <li>@f.Id.ToString()</li> *@
     @*     } *@
-    <button @onclick="async () => { await UpFolder(); }">Up folder</button>
+    <div class="files-detail-header">
+        <img @onclick="async () => { await UpFolder(); }" src="favicon.ico"/>
+        <span>/@(this.Parent?.Name ?? "...")</span>
+        <input placeholder="Today I am looking for ... ?"/>
+        <span>listing <b>@(this.Drive?.Name ?? "...")</b></span>
+    </div>
 
-    @foreach (var folder in this.folders)
-    {
-        <li @onclick="async () => { await ParentSelected.InvokeAsync(folder); }">@folder.Name</li>
-    }
+    <hr/>
 
-    @foreach (var file in this.files)
-    {
-        <li @onclick="async () => { await this.IFileSelected.InvokeAsync(file); }">[@file.Name]</li>
-    }
-</ul>
+    <table class="files-detail-content">
+        <tbody>
+        @foreach (var folder in this.folders)
+        {
+            <tr @onclick="async () => { await this.IFileSelected.InvokeAsync(folder); }" @ondblclick="async () => { await this.ParentSelected.InvokeAsync(folder); }">
+                <td>
+                    <img src="favicon.ico"/>
+                </td>
+                <td>@folder.Name</td>
+                <td>@folder.Size.ToString()</td>
+                <td>2/12/2020 4:15PM</td>
+                <td>File</td>
+                <td>
+                    <button class="danger">Delete</button>
+                </td>
+            </tr>
+        }
+
+        @foreach (var file in this.files)
+        {
+            <tr @onclick="async () => { await this.IFileSelected.InvokeAsync(file); }" @ondblclick="async () => { await this.OpenFile(file); }">
+                <td>
+                    <img src="favicon.ico"/>
+                </td>
+                <td>[@file.Name]</td>
+                <td>@file.Content.Length.ToString()</td>
+                <td>2/12/2020 4:15PM</td>
+                <td>File</td>
+                <td>
+                    <button class="danger">Delete</button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+</section>
 
 @code {
 
@@ -48,6 +83,13 @@
         var p = await this._ms.GetDriveFolder(this.Drive.Id, this.Parent.ParentId);
         await this.ParentSelected.InvokeAsync(p);
     }
+
+
+    public async Task OpenFile(FileModel file)
+    {
+        this._nav.NavigateTo($"/file/{file.Id.ToString()}");
+    }
+
 
     protected override async Task OnParametersSetAsync()
     {

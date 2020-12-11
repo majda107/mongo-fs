@@ -1,13 +1,19 @@
+@using MongoDB.Bson
 @inject MongoService _ms;
 
 
-<ul>
+<ul class="drives">
     @foreach (var drive in _ms.GetDrives())
     {
-        <li @onclick="async () => { await this.Selected.InvokeAsync(drive); }">
-            <span>Drive: @drive.Name</span>
-            <span>@((drive.Capacity - drive.Taken).ToString())GB</span>
-        </li>
+        @if (drive.Id != (this.Active?.Id ?? ObjectId.Empty))
+        {
+            <li @onclick="async () => { await this.Selected.InvokeAsync(drive); }" class="drive data-grid">
+                <span>Drive: @drive.Name</span>
+                <span>
+                    <b>@((drive.Capacity - drive.Taken).ToString())GB</b>
+                </span>
+            </li>
+        }
     }
 </ul>
 
@@ -15,5 +21,8 @@
 
     [Parameter]
     public EventCallback<DriveModel> Selected { get; set; }
+
+    [Parameter]
+    public DriveModel Active { get; set; }
 
 }

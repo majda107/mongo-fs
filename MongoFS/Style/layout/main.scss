@@ -1,16 +1,25 @@
+@import "../abstracts/variables.scss";
+
+body {
+  background-color: $background-secondary;
+}
+
 main {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 120px;
 }
 
 .mongofs-layout {
   max-width: 1200px;
   width: 100%;
-  
+
   display: grid;
   grid-template-columns: 310px 1fr;
   column-gap: 56px;
   row-gap: 46px;
+  
+  & > .mongofs-header {
+    align-self: flex-end;
+  }
 }

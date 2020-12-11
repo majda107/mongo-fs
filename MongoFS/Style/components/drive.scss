@@ -1,0 +1,40 @@
+@import "../abstracts/variables.scss";
+@import "../abstracts/mixins.scss";
+
+.drive-detail {
+  border: 16px solid $background-primary;
+  border-radius: 6px;
+  box-sizing: border-box;
+  
+  padding: 22px 24px;
+  min-height: 160px;
+  
+  @include drop;
+  @include inset-drop;
+  
+}
+
+.drive {
+  background-color: $background-primary;
+  border: 8px solid $text-secondary;
+  border-radius: 6px;
+  padding: 20px 26px;
+  min-width: 280px;
+  margin-right: 20px;
+  
+  &:hover {
+    cursor: pointer;
+  }
+  
+  & > span:nth-of-type(2)
+  {
+    text-align: right;
+  }
+}
+
+.drives {
+  display: flex;
+  align-items: flex-start;
+  flex-flow: row;
+  flex-wrap: wrap;
+}

@@ -4,24 +4,31 @@
 <div class="mongofs-layout">
     <section class="mongofs-header">
         <h1>MongoFS</h1>
-        <span>FileSystem to save ‘em all.</span>
+        <span class="subheader">FileSystem to save ‘em all.</span>
     </section>
 
     <section class="statistics">
-        <h2>Statistics</h2>
-        <span>Files: 42</span>
-        <span>Folders: 14</span>
-        <span>Drives: 4</span>
-
-        <span>Created by Marián Trpkoš</span>
+        <div class="statistics-header">
+            <h2>Statistics</h2>
+            <ul>
+                <li>Files: 42</li>
+                <li>Folders: 14</li>
+                <li>Drives: 4</li>
+            </ul>
+        </div>
+        <ul>
+            <li>Running on <b>ASP.NET 5</b></li>
+            <li>Stored in <b>MongoDB</b></li>
+        </ul>
+        <span>Crafted with ❤️ by️ <b>Marián Trpkoš</b></span>
     </section>
 
-    <section class="drive">
+    <section class="mongofs-drive">
         <DriveDetail Drive="@this.drive"/>
     </section>
 
     <section class="drives">
-        <DrivesDetail Selected="@Selected"></DrivesDetail>
+        <DrivesDetail Selected="@Selected" Active="@this.drive"></DrivesDetail>
     </section>
 
     <section class="detail">

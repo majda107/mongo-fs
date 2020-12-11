@@ -1,0 +1,18 @@
+@import "../abstracts/variables.scss";
+
+button {
+  padding: 6px 24px;
+  font-size: 1rem;
+  border-radius: 4px;
+  background-color: $info-color;
+  outline: none;
+  border: none;
+  color: $text-primary;
+
+  font-weight: 500;
+}
+
+button.danger {
+  background-color: $danger-color;
+  color: $background-primary;
+}

@@ -1,22 +1,32 @@
-<div class="drive data-grid">
+<div class="drive-detail">
     @if (this.Drive == null)
     {
         <span>No drive selected...</span>
     }
     else
     {
-        <span>Drive:</span>
-        <span>@Drive.Name</span>
+        <div class="data-grid">
+            <span>Drive:</span>
+            <span>
+                <b>@Drive.Name</b>
+            </span>
 
-        <span>Capacity:</span>
-        <span>@(Drive.Capacity.ToString())</span>
+            <span>Capacity:</span>
+            <span>
+                <b>@(Drive.Capacity.ToString())</b>
+            </span>
 
-        <span>Space:</span>
-        <span>@((Drive.Capacity - Drive.Taken).ToString())</span>
+            <span>Space:</span>
+            <span>
+                <b>@((Drive.Capacity - Drive.Taken).ToString())</b>
+            </span>
 
 
-        <span>Created:</span>
-        <span>2/12/2020 4:34PM</span>
+            <span>Created:</span>
+            <span>
+                <b>2/12/2020 4:20PM</b>
+            </span>
+        </div>
     }
 
 

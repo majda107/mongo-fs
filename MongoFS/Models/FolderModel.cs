@@ -9,7 +9,7 @@ namespace MongoFS.Models
         // [BsonId] public ObjectId Id { get; set; }
 
 
-        public ObjectId DriveId { get; set; }
+        // public ObjectId DriveId { get; set; }
 
         // public string Name { get; set; }
 

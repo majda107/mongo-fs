@@ -1,0 +1,29 @@
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+
+.file-detail {
+  background-color: $background-primary;
+  @include drop;
+  
+  border-radius: 6px;
+  display: flex;
+  flex-flow: column;
+  
+  padding: 24px 36px;
+  
+  align-items: center;
+  
+  & > * {
+    margin-bottom: 32px;
+  }
+  
+  & > :last-child {
+    margin-bottom: 0;
+  }
+  
+  &-buttons {
+    display: grid;
+    column-gap: 18px;
+    grid-auto-flow: column;
+  }
+}

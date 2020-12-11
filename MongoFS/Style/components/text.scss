@@ -1,0 +1,26 @@
+@import "../abstracts/variables.scss";
+
+h1 {
+  font-size: 2.125rem;
+  color: $text-primary;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.subheader {
+  font-size: 1.125rem;
+  color: $text-secondary;
+}
+
+
+span, li {
+  font-weight: 300;
+  font-size: 1rem;
+}
+
+b {
+  font-weight: 500;
+}

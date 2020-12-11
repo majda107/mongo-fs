@@ -1,6 +1,17 @@
 @import "./abstracts/variables";
 
+@import "./components/button.scss";
+@import "./components/text.scss";
+@import "./components/ul.scss";
+@import "./components/drive.scss";
+@import "./components/data.scss";
+@import "./components/file-detail.scss";
+@import "./components/files-detail.scss";
+@import "./components/input.scss";
+
 @import "./layout/main.scss";
+@import "./layout/statistics.scss";
+
 
 //.test {
 //  color: $primary-color;
@@ -9,4 +20,5 @@
 
 * {
   font-family: 'Quicksand', sans-serif;
+  color: $text-primary;
 }

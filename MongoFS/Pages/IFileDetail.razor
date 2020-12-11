@@ -1,4 +1,4 @@
-<div class="detail">
+<div class="file-detail">
     @if (this.IFile == null)
     {
         <span>No content selected...</span>
@@ -10,21 +10,46 @@
 
         <div class="data-grid">
 
-            <span>Drive:</span>
-            <span>MajdaDrive</span>
+            @if (this.IFile is FolderModel folder)
+            {
+                <span>Files:</span>
+                <span>
+                    <b>@folder.Files.Count.ToString()</b>
+                </span>
 
-            <span>Capacity:</span>
-            <span>500GB</span>
+                <span>Folders:</span>
+                <span>
+                    <b>@folder.Folders.Count.ToString()</b>
+                </span>
 
-            <span>Space:</span>
-            <span>220GB</span>
+                <span>Size:</span>
+                <span>
+                    <b>@folder.Size.ToString()</b>
+                </span>
+            }
 
             <span>Created:</span>
-            <span>2/12/2020 4:34PM</span>
+            <span>
+                <b>2/12/2020 4:34PM</b>
+            </span>
+
+            <span>Last edit:</span>
+            <span>
+                <b>2/12/2020 4:34PM</b>
+            </span>
+
+            @* <span>Id:</span> *@
+            @* <span> *@
+            @*     <b>@this.IFile.Id.ToString()</b> *@
+            @* </span> *@
+
 
         </div>
 
-        <button>Share</button>
+        <div class="file-detail-buttons">
+            <button>Share</button>
+            <button class="danger">Delete</button>
+        </div>
     }
 </div>
 
