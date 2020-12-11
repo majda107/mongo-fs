@@ -8,49 +8,51 @@
     @*         <li>@f.Id.ToString()</li> *@
     @*     } *@
     <div class="files-detail-header">
-        <img @onclick="async () => { await UpFolder(); }" src="favicon.ico"/>
+        <img @onclick="async () => { await UpFolder(); }" src="icons/up.svg"/>
         <span>/@(this.Parent?.Name ?? "...")</span>
         <input placeholder="Today I am looking for ... ?"/>
-        <span>listing <b>@(this.Drive?.Name ?? "...")</b></span>
+        <span>listing drive <b>@(this.Drive?.Name ?? "...")</b></span>
     </div>
 
     <hr/>
 
-    <table class="files-detail-content">
-        <tbody>
-        @foreach (var folder in this.folders)
-        {
-            <tr @onclick="async () => { await this.IFileSelected.InvokeAsync(folder); }" @ondblclick="async () => { await this.ParentSelected.InvokeAsync(folder); }">
-                <td>
-                    <img src="favicon.ico"/>
-                </td>
-                <td>@folder.Name</td>
-                <td>@folder.Size.ToString()</td>
-                <td>2/12/2020 4:15PM</td>
-                <td>File</td>
-                <td>
-                    <button class="danger">Delete</button>
-                </td>
-            </tr>
-        }
+    <div class="files-detail-content">
+        <table>
+            <tbody>
+            @foreach (var folder in this.folders)
+            {
+                <tr class='@(folder?.Id == this.Selected?.Id ? "selected" : "")' @onclick="async () => { await this.IFileSelected.InvokeAsync(folder); }" @ondblclick="async () => { await this.ParentSelected.InvokeAsync(folder); }">
+                    <td>
+                        <img src="icons/folder.svg"/>
+                    </td>
+                    <td>@folder.Name</td>
+                    <td>@folder.Size.ToString()</td>
+                    <td>2/12/2020 4:15PM</td>
+                    <td>Folder</td>
+                    <td>
+                        <button class="danger">Delete</button>
+                    </td>
+                </tr>
+            }
 
-        @foreach (var file in this.files)
-        {
-            <tr @onclick="async () => { await this.IFileSelected.InvokeAsync(file); }" @ondblclick="async () => { await this.OpenFile(file); }">
-                <td>
-                    <img src="favicon.ico"/>
-                </td>
-                <td>[@file.Name]</td>
-                <td>@file.Content.Length.ToString()</td>
-                <td>2/12/2020 4:15PM</td>
-                <td>File</td>
-                <td>
-                    <button class="danger">Delete</button>
-                </td>
-            </tr>
-        }
-        </tbody>
-    </table>
+            @foreach (var file in this.files)
+            {
+                <tr class='@(file?.Id == this.Selected?.Id ? "selected" : "")' @onclick="async () => { await this.IFileSelected.InvokeAsync(file); }" @ondblclick="async () => { await this.OpenFile(file); }">
+                    <td>
+                        <img src="icons/file.svg"/>
+                    </td>
+                    <td>[@file.Name]</td>
+                    <td>@file.Content.Length.ToString()</td>
+                    <td>2/12/2020 4:15PM</td>
+                    <td>File</td>
+                    <td>
+                        <button class="danger">Delete</button>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
 
 </section>
 
@@ -71,6 +73,9 @@
 
     [Parameter]
     public EventCallback<IFileModel> IFileSelected { get; set; }
+
+    [Parameter]
+    public IFileModel Selected { get; set; }
 
 
     private IList<FolderModel> folders = new List<FolderModel>();

@@ -60,7 +60,7 @@ ul {
   border-radius: 6px;
   padding: 20px 26px;
   min-width: 280px;
-  margin-right: 20px;
+  margin-right: 40px;
 }
 .drive:hover {
   cursor: pointer;
@@ -113,10 +113,53 @@ ul {
   display: grid;
   grid-template-columns: auto auto 1fr auto;
   align-items: center;
-  column-gap: 14px;
+  column-gap: 22px;
+}
+.files-detail-header img:hover {
+  cursor: pointer;
 }
 .files-detail-content {
   padding: 32px 24px;
+}
+.files-detail-content > table {
+  table-layout: fixed;
+  width: 100%;
+}
+.files-detail-content > table > tbody > tr {
+  border-bottom: 1px solid #646464;
+}
+.files-detail-content > table > tbody > tr:hover {
+  cursor: pointer;
+}
+.files-detail-content > table > tbody > tr.selected {
+  background-color: #F1F1F1;
+}
+.files-detail-content > table > tbody > tr > td {
+  padding: 12px 6px;
+  user-select: none;
+}
+.files-detail-content > table > tbody > tr > td:nth-of-type(1) {
+  width: 80px;
+  padding-left: 32px;
+}
+.files-detail-content > table > tbody > tr > td:nth-of-type(1) > img {
+  height: 32px;
+}
+.files-detail-content > table > tbody > tr > td:nth-of-type(3) {
+  text-align: center;
+}
+.files-detail-content > table > tbody > tr > td:last-of-type {
+  padding-right: 32px;
+  width: 152px;
+}
+.files-detail-content > table > tbody > tr > td:last-of-type > button {
+  width: 120px;
+}
+.files-detail-content > table > tbody > tr > td:nth-of-type(4) {
+  width: 22%;
+}
+.files-detail-content > table > tbody > tr > td:nth-of-type(5) {
+  width: 25%;
 }
 .files-detail-content, .files-detail-header {
   background-color: #FBFBFB;

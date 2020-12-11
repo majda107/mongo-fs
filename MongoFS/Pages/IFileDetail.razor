@@ -6,7 +6,15 @@
     else
     {
         <h3>/@IFile.Name</h3>
-        <img src="favicon.ico" width="72"/>
+
+        @if (this.IFile is FolderModel ffolder)
+        {
+            <img src="icons/folder.svg" width="72"/>
+        }
+        else if (this.IFile is FileModel ffile)
+        {
+            <img src="icons/file.svg" width="72"/>
+        }
 
         <div class="data-grid">
 
