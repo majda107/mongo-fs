@@ -1,3 +1,4 @@
+using System;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -16,5 +17,7 @@ namespace MongoFS.Models
 
 
         public ObjectId FolderId { get; set; }
+
+        public DateTime LastEdit = DateTime.Now;
     }
 }

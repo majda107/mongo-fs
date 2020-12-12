@@ -42,7 +42,7 @@
                     <td>
                         <img src="icons/file.svg"/>
                     </td>
-                    <td>[@file.Name]</td>
+                    <td>@(file.Name).@(file.Type.ToLower())</td>
                     <td>@(file.Content?.Length.ToString() ?? "0")</td>
                     <td>2/12/2020 4:15PM</td>
                     <td>File</td>
@@ -98,11 +98,20 @@
 
     public async Task OpenFile(FileModel file)
     {
-        this._nav.NavigateTo($"/file/{file.Id.ToString()}");
+    // HACK prevent from parameter set call
+        this.opening = true;
+
+        var url = $"/file/{file.Id.ToString()}";
+
+    // HACK prevent from parameter set call
+        await Task.Delay(200);
+
+        this._nav.NavigateTo(url);
     }
 
 
     private bool rendered = false;
+    private bool opening = false;
 
     protected override Task OnAfterRenderAsync(bool firstRender)
     {
@@ -130,8 +139,8 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        Console.WriteLine("Trying to retreive disk folders...");
-        if (this.Drive == null) return;
+    // OPENING CHANGEURL PREVENTION HACK
+        if (this.Drive == null || this.opening) return;
 
     // this.folders = await this._ms.GetFolders(this.Drive.Id, this.Parent?.Id ?? ObjectId.Empty);
     // this.files = await this._ms.GetFolderFiles(this.Drive.Id, this.Parent?.Id ?? ObjectId.Empty);

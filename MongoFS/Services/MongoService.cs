@@ -69,7 +69,7 @@ namespace MongoFS.Services
                 Builders<FolderModel>.Update.Pull(u => u.Files, fileId));
         }
 
-        //TODO update disk size
+        //REVIEW update disk size
         public async Task DeleteFolder(ObjectId folderId)
         {
             var folder = this._database.GetCollection<FolderModel>(FOLDERS).AsQueryable()
@@ -146,12 +146,15 @@ namespace MongoFS.Services
 
         public async Task UpdateFile(FileModel file)
         {
+            file.LastEdit = DateTime.Now;
+
             var current = this._database.GetCollection<FileModel>(FILES).AsQueryable()
                 .FirstOrDefault(f => f.Id == file.Id);
             if (current == null) return;
 
             var inc = file.Content.Length - (current.Content?.Length ?? 0);
 
+            // REPLACE THE FILE
             await this._database.GetCollection<FileModel>(FILES).ReplaceOneAsync(f => f.Id == file.Id, file);
 
             // UPDATE FOLDER SIZE CASCADE
@@ -159,7 +162,7 @@ namespace MongoFS.Services
         }
 
 
-        // TODO register to parent folder (children)
+        // REVIEW register to parent folder (children)
         public async Task CreateFolder(ObjectId drive, ObjectId parent, string name)
         {
             var id = ObjectId.GenerateNewId();

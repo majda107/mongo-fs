@@ -45,7 +45,7 @@ h2 {
 
 span, li {
   font-weight: 300;
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
 
 b {
@@ -105,7 +105,7 @@ ul {
   border-radius: 6px;
   display: flex;
   flex-flow: column;
-  padding: 24px 36px;
+  padding: 24px 32px;
   align-items: center;
 }
 .file-detail > * {

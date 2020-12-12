@@ -1,3 +1,4 @@
+@using System.Globalization
 @inject MongoService _ms;
 
 <div class="file-detail">
@@ -7,14 +8,14 @@
     }
     else
     {
-        <h3>/@IFile.Name</h3>
-
         @if (this.IFile is FolderModel ffolder)
         {
+            <h3>/@IFile.Name</h3>
             <img src="icons/folder.svg" width="72"/>
         }
         else if (this.IFile is FileModel ffile)
         {
+            <h3>@(IFile.Name).@(ffile.Type.ToLower())</h3>
             <img src="icons/file.svg" width="72"/>
         }
 
@@ -37,16 +38,20 @@
                     <b>@folder.Size.ToString()</b>
                 </span>
             }
+            else if (this.IFile is FileModel file)
+            {
+                <span>Last edit:</span>
+                <span>
+                    <b>@(file.LastEdit.Day.ToString())/@(file.LastEdit.Month.ToString())/@(file.LastEdit.Year.ToString()) @(file.LastEdit.ToString("hh:mm tt", System.Globalization.CultureInfo.InvariantCulture))</b>
+                </span>
+            }
+
 
             <span>Created:</span>
             <span>
-                <b>2/12/2020 4:34PM</b>
+                <b>@(this.IFile.Created.Day.ToString())/@(this.IFile.Created.Month.ToString())/@(this.IFile.Created.Year.ToString()) @(this.IFile.Created.ToString("hh:mm tt", System.Globalization.CultureInfo.InvariantCulture))</b>
             </span>
 
-            <span>Last edit:</span>
-            <span>
-                <b>2/12/2020 4:34PM</b>
-            </span>
 
             @* <span>Id:</span> *@
             @* <span> *@
