@@ -69,6 +69,51 @@
             <img src="icons/cross.svg"/>
         </button>
     </div>
+
+    <div class="overlay" id="new-file">
+        <button class="overlay-close" onclick="window.location.hash = ''">
+            <img src="icons/cross.svg"/>
+        </button>
+
+        <form class="overlay-form" @onsubmit="async () => { await this._ms.CreateFile(this.drive.Id, this.parent?.Id ?? ObjectId.Empty, this.newFileName, this.newFileType); this.StateHasChanged(); }">
+            <h2>Create new file</h2>
+
+            <div class="overlay-form-control">
+                <label>Name</label>
+                <input type="text" placeholder="MyFile" @bind="newFileName"/>
+            </div>
+
+            <div class="overlay-form-control">
+                <label>Type</label>
+                <input type="text" placeholder="HTML" @bind="newFolderName"/>
+            </div>
+
+            <div class="overlay-form-buttons">
+                <button class="success">Create!</button>
+                <button type="button" onclick="window.location.hash = ''">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="overlay" id="new-folder">
+        <button class="overlay-close" onclick="window.location.hash = ''">
+            <img src="icons/cross.svg"/>
+        </button>
+
+        <form class="overlay-form" @onsubmit="async () => { await this._ms.CreateFolder(this.drive.Id, this.parent?.Id ?? ObjectId.Empty, this.newFolderName); this.StateHasChanged(); }">
+            <h2>Create new folder</h2>
+
+            <div class="overlay-form-control">
+                <label>Name</label>
+                <input type="text" placeholder="MyFolder" @bind="newFolderName"/>
+            </div>
+
+            <div class="overlay-form-buttons">
+                <button class="success">Create!</button>
+                <button type="button" onclick="window.location.hash = ''">Cancel</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 @code {
@@ -83,6 +128,13 @@
     private DriveModel drive = null;
     private FolderModel parent = null;
     private IFileModel selected = null;
+
+
+    private string newFolderName = "";
+
+    private string newFileName = "";
+    private string newFileType = "";
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -102,10 +154,10 @@
     private void Selected(DriveModel drive)
     {
         this.drive = drive;
-        
+
         this.parent = null;
         this.selected = null;
-        
+
         Console.WriteLine($"Drive {drive.Name} selected!");
         this.StateHasChanged();
     }

@@ -8,7 +8,7 @@
         @if (drive.Id != (this.Active?.Id ?? ObjectId.Empty))
         {
             <li @onclick="async () => { await this.Selected.InvokeAsync(drive); }" class="drive data-grid">
-                <span>Drive: @drive.Name</span>
+                <span>@drive.Name</span>
                 <span>
                     <b>@((drive.Capacity - drive.Taken).ToString())GB</b>
                 </span>
@@ -16,7 +16,7 @@
         }
     }
     <li>
-        <button onclick="window.location.hash = 'new-drive'">New drive</button>
+        <button onclick="window.location.hash = 'new-drive'" class="secondary">New drive</button>
     </li>
 </ul>
 

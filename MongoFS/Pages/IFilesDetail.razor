@@ -31,7 +31,7 @@
                     <td>2/12/2020 4:15PM</td>
                     <td>Folder</td>
                     <td>
-                        <button class="danger">Delete</button>
+                        <button class="danger" @onclick="async () => { await this.DeleteFolder(folder); }">Delete</button>
                     </td>
                 </tr>
             }
@@ -43,16 +43,21 @@
                         <img src="icons/file.svg"/>
                     </td>
                     <td>[@file.Name]</td>
-                    <td>@file.Content.Length.ToString()</td>
+                    <td>@(file.Content?.Length.ToString() ?? "0")</td>
                     <td>2/12/2020 4:15PM</td>
                     <td>File</td>
                     <td>
-                        <button class="danger">Delete</button>
+                        <button class="danger" @onclick="async () => { await this.DeleteFile(file); }">Delete</button>
                     </td>
                 </tr>
             }
             </tbody>
         </table>
+
+        <div class="files-detail-content-buttons">
+            <button class="primary" onclick="window.location.hash='new-file'">New file</button>
+            <button class="primary" onclick="window.location.hash='#new-folder'">New folder</button>
+        </div>
     </div>
 
 </section>
@@ -105,14 +110,33 @@
         return Task.CompletedTask;
     }
 
+    private async Task DeleteFolder(FolderModel f)
+    {
+        await this._ms.DeleteFolder(f.Id);
+        await this.RefreshFolders();
+        this.StateHasChanged();
+    }
+
+    private async Task DeleteFile(FileModel f)
+    {
+        await this._ms.DeleteFile(f.Id);
+        await this.RefreshFiles();
+        this.StateHasChanged();
+    }
+
+    private async Task RefreshFolders() => this.folders = await this._ms.GetFolders(this.Drive.Id, this.Parent?.Id ?? ObjectId.Empty);
+    private async Task RefreshFiles() => this.files = await this._ms.GetFolderFiles(this.Drive.Id, this.Parent?.Id ?? ObjectId.Empty);
+
 
     protected override async Task OnParametersSetAsync()
     {
         Console.WriteLine("Trying to retreive disk folders...");
         if (this.Drive == null) return;
 
-        this.folders = await this._ms.GetFolders(this.Drive.Id, this.Parent?.Id ?? ObjectId.Empty);
-        this.files = await this._ms.GetFolderFiles(this.Drive.Id, this.Parent?.Id ?? ObjectId.Empty);
+    // this.folders = await this._ms.GetFolders(this.Drive.Id, this.Parent?.Id ?? ObjectId.Empty);
+    // this.files = await this._ms.GetFolderFiles(this.Drive.Id, this.Parent?.Id ?? ObjectId.Empty);
+        await this.RefreshFolders();
+        await this.RefreshFiles();
 
         if (this.Drive == null || !rendered) return;
 

@@ -62,7 +62,7 @@ namespace MongoFS.Services
             if (file == null) throw new Exception();
 
             await this._database.GetCollection<FileModel>(FILES).DeleteOneAsync(f => f.Id == fileId);
-            await this.UpdateFolderSize(file.FolderId, -file.Content.Length);
+            await this.UpdateFolderSize(file.FolderId, -file.Content?.Length ?? 0);
 
 
             await this._database.GetCollection<FolderModel>(FOLDERS).UpdateOneAsync(f => f.Id == file.FolderId,
@@ -176,7 +176,7 @@ namespace MongoFS.Services
         }
 
 
-        public async Task CreateFile(ObjectId drive, ObjectId folder, string name)
+        public async Task CreateFile(ObjectId drive, ObjectId folder, string name, string type = "text")
         {
             var id = ObjectId.GenerateNewId();
             await this._database.GetCollection<FileModel>(FILES).InsertOneAsync(new FileModel()
@@ -184,7 +184,8 @@ namespace MongoFS.Services
                 Id = id,
                 DriveId = drive,
                 FolderId = folder,
-                Name = name
+                Name = name,
+                Type = type
             });
 
             await this._database.GetCollection<FolderModel>(FOLDERS).UpdateOneAsync(f => f.Id == folder,

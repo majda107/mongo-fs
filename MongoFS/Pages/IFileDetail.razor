@@ -1,3 +1,5 @@
+@inject MongoService _ms;
+
 <div class="file-detail">
     @if (this.IFile == null)
     {
@@ -55,8 +57,15 @@
         </div>
 
         <div class="file-detail-buttons">
-            <button>Share</button>
-            <button class="danger">Delete</button>
+            <button onclick="window.location.hash='share'">Share</button>
+            @if (this.IFile is FolderModel)
+            {
+                <button class="danger" @onclick="async () => { await this._ms.DeleteFolder(this.IFile.Id); this.StateHasChanged(); }">Delete</button>
+            }
+            else if (this.IFile is FileModel)
+            {
+                <button class="danger" @onclick="async () => { await this._ms.DeleteFile(this.IFile.Id); this.StateHasChanged(); }">Delete</button>
+            }
         </div>
     }
 </div>

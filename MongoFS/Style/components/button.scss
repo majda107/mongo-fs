@@ -20,3 +20,13 @@ button.danger {
 button.success {
   background-color: $success-color;
 }
+
+button.primary {
+  background-color: $primary-color;
+  font-size: 1.1rem;
+  color: $background-primary;
+}
+
+button.secondary {
+  background-color: $background-primary;
+}
