@@ -62,7 +62,7 @@ namespace MongoFS.Services
             if (file == null) throw new Exception();
 
             await this._database.GetCollection<FileModel>(FILES).DeleteOneAsync(f => f.Id == fileId);
-            await this.UpdateFolderSize(file.FolderId, -file.Content?.Length ?? 0);
+            await this.UpdateFolderSize(file.FolderId, file.DriveId, -file.Content?.Length ?? 0);
 
 
             await this._database.GetCollection<FolderModel>(FOLDERS).UpdateOneAsync(f => f.Id == file.FolderId,
@@ -90,8 +90,8 @@ namespace MongoFS.Services
             await this._database.GetCollection<FolderModel>(FOLDERS).UpdateOneAsync(f => f.Id == folder.ParentId,
                 Builders<FolderModel>.Update.Pull(f => f.Folders, folderId));
 
+            await this.UpdateFolderSize(folder.ParentId, folder.DriveId, -folder.Size);
             await this._database.GetCollection<FolderModel>(FOLDERS).DeleteOneAsync(f => f.Id == folderId);
-            await this.UpdateFolderSize(folder.ParentId, -folder.Size);
         }
 
         // DIRTY WAY TO DELETE FOLDER
@@ -155,7 +155,7 @@ namespace MongoFS.Services
             await this._database.GetCollection<FileModel>(FILES).ReplaceOneAsync(f => f.Id == file.Id, file);
 
             // UPDATE FOLDER SIZE CASCADE
-            await this.UpdateFolderSize(file.FolderId, inc);
+            await this.UpdateFolderSize(file.FolderId, file.DriveId, inc);
         }
 
 
@@ -197,7 +197,7 @@ namespace MongoFS.Services
 
 
         // SIZE UPDATING
-        public async Task UpdateFolderSize(ObjectId folder, int inc)
+        public async Task UpdateFolderSize(ObjectId folder, ObjectId drive, int inc)
         {
             await this._database.GetCollection<FolderModel>(FOLDERS).UpdateOneAsync(fi => fi.Id == folder,
                 Builders<FolderModel>.Update.Inc(f => f.Size, inc));
@@ -205,8 +205,8 @@ namespace MongoFS.Services
             var f = this._database.GetCollection<FolderModel>(FOLDERS).AsQueryable()
                 .FirstOrDefault(f => f.Id == folder);
 
-            if (f != null && f.ParentId != ObjectId.Empty) await this.UpdateFolderSize(f.ParentId, inc);
-            else if (f != null && f.ParentId == ObjectId.Empty) await this.UpdateDriveSize(f.DriveId, inc);
+            if (f != null && f.ParentId != ObjectId.Empty) await this.UpdateFolderSize(f.ParentId, drive, inc);
+            else await this.UpdateDriveSize(drive, inc);
         }
 
         public async Task UpdateDriveSize(ObjectId drive, int inc)

@@ -12,6 +12,9 @@
   @include drop;
   @include inset-drop;
   
+  & > button {
+    margin-top: 14px;
+  }
 }
 
 .drive {

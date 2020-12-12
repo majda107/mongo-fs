@@ -67,6 +67,9 @@ ul {
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1), inset 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
+.drive-detail > button {
+  margin-top: 14px;
+}
 
 .drive {
   background-color: #FBFBFB;

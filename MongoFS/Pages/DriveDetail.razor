@@ -1,3 +1,5 @@
+@inject MongoService _ms;
+
 <div class="drive-detail">
     @if (this.Drive == null)
     {
@@ -27,6 +29,8 @@
                 <b>2/12/2020 4:20PM</b>
             </span>
         </div>
+        
+        <button class="danger" @onclick="async () => { await this._ms.DeleteDrive(this.Drive.Id); this.StateHasChanged(); }">Delete</button>
     }
 
 

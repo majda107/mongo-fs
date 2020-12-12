@@ -46,17 +46,17 @@
     @* <button onclick="window.location.href = '#new'">Trigger modal</button> *@
 
     <div class="overlay" id="new-drive">
-        <form class="overlay-form">
+        <form class="overlay-form" @onclick="() => { this._ms.CreateDrive(new DriveModel {Name = this.newDriveName, Capacity = this.newDriveCapacity}); this.StateHasChanged(); }">
             <h2>Create new drive</h2>
 
             <div class="overlay-form-control">
                 <label>Name</label>
-                <input type="text" placeholder="MajdaDrive"/>
+                <input type="text" placeholder="MajdaDrive" @bind="newDriveName"/>
             </div>
 
             <div class="overlay-form-control">
                 <label>Capacity</label>
-                <input type="number" placeholder="500"/>
+                <input type="number" placeholder="500" @bind="newDriveCapacity"/>
             </div>
 
             <div class="overlay-form-buttons">
@@ -85,7 +85,7 @@
 
             <div class="overlay-form-control">
                 <label>Type</label>
-                <input type="text" placeholder="HTML" @bind="newFolderName"/>
+                <input type="text" placeholder="HTML" @bind="newFileType"/>
             </div>
 
             <div class="overlay-form-buttons">
@@ -135,6 +135,8 @@
     private string newFileName = "";
     private string newFileType = "";
 
+    private string newDriveName = "";
+    private int newDriveCapacity = 500;
 
     protected override async Task OnInitializedAsync()
     {
