@@ -69,6 +69,7 @@ namespace MongoFS.Services
                 Builders<FolderModel>.Update.Pull(u => u.Files, fileId));
         }
 
+        //TODO update disk size
         public async Task DeleteFolder(ObjectId folderId)
         {
             var folder = this._database.GetCollection<FolderModel>(FOLDERS).AsQueryable()

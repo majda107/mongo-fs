@@ -68,6 +68,19 @@
             }
         </div>
     }
+
+    @if (this.IFile != null)
+    {
+        <div class="overlay" id="share">
+            <button class="overlay-close" onclick="window.location.hash = ''">
+                <img src="icons/cross.svg"/>
+            </button>
+
+            <div class="overlay-form">
+                <span>@this.IFile.Id.ToString()</span>
+            </div>
+        </div>
+    }
 </div>
 
 @code {
