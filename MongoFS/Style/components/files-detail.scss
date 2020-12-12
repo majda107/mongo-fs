@@ -60,10 +60,11 @@
           
           & > td:last-of-type {
             padding-right: 32px;
-            width: 152px;
+            width: 132px;
             
             & > button {
-              width: 120px;
+              width: 90px;
+              font-size: 0.75rem;
             }
           }
           

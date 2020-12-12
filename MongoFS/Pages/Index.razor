@@ -1,4 +1,7 @@
 ﻿@page "/"
+@page "/{Id}"
+@page "/{Id}/{FolderId}"
+@using MongoDB.Bson
 @inject MongoService _ms;
 
 <div class="mongofs-layout">
@@ -38,23 +41,71 @@
     <section class="files">
         <IFilesDetail Drive="@this.drive" Parent="@this.parent" ParentSelected="@ParentSelected" IFileSelected="@IFileSelected" Selected="@this.selected"/>
     </section>
+
+    @* <a href="#new">Modal</a> *@
+    @* <button onclick="window.location.href = '#new'">Trigger modal</button> *@
+
+    <div class="overlay" id="new-drive">
+        <form class="overlay-form">
+            <h2>Create new drive</h2>
+
+            <div class="overlay-form-control">
+                <label>Name</label>
+                <input type="text" placeholder="MajdaDrive"/>
+            </div>
+
+            <div class="overlay-form-control">
+                <label>Capacity</label>
+                <input type="number" placeholder="500"/>
+            </div>
+
+            <div class="overlay-form-buttons">
+                <button class="success">Create!</button>
+                <button type="button" onclick="window.location.hash = ''">Cancel</button>
+            </div>
+        </form>
+
+        <button class="overlay-close" onclick="window.location.hash = ''">
+            <img src="icons/cross.svg"/>
+        </button>
+    </div>
 </div>
 
 @code {
-    //TODO implement route id's
-    // [Parameter]
-    // public string Id { get; set; }
-    //
-    // [Parameter]
-    // public string FolderId { get; set; }
+
+    [Parameter]
+    public string Id { get; set; }
+
+    [Parameter]
+    public string FolderId { get; set; }
+
 
     private DriveModel drive = null;
     private FolderModel parent = null;
     private IFileModel selected = null;
 
+    protected override async Task OnInitializedAsync()
+    {
+        if (ObjectId.TryParse(this.Id, out ObjectId parsedId))
+        {
+            this.drive = await this._ms.GetDrive(parsedId);
+            this.StateHasChanged();
+        }
+
+        if (ObjectId.TryParse(this.FolderId, out ObjectId folder))
+        {
+            this.parent = await this._ms.GetDriveFolder(this.drive.Id, folder);
+            this.StateHasChanged();
+        }
+    }
+
     private void Selected(DriveModel drive)
     {
         this.drive = drive;
+        
+        this.parent = null;
+        this.selected = null;
+        
         Console.WriteLine($"Drive {drive.Name} selected!");
         this.StateHasChanged();
     }
