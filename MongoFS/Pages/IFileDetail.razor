@@ -38,14 +38,11 @@
                     <b>@folder.Size.ToString()</b>
                 </span>
             }
-            else if (this.IFile is FileModel file)
-            {
-                <span>Last edit:</span>
-                <span>
-                    <b>@(file.LastEdit.Day.ToString())/@(file.LastEdit.Month.ToString())/@(file.LastEdit.Year.ToString()) @(file.LastEdit.ToString("hh:mm tt", System.Globalization.CultureInfo.InvariantCulture))</b>
-                </span>
-            }
 
+            <span>Last edit:</span>
+            <span>
+                <b>@(this.IFile.LastEdit.Day.ToString())/@(this.IFile.LastEdit.Month.ToString())/@(this.IFile.LastEdit.Year.ToString()) @(this.IFile.LastEdit.ToString("hh:mm tt", System.Globalization.CultureInfo.InvariantCulture))</b>
+            </span>
 
             <span>Created:</span>
             <span>

@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -12,5 +13,8 @@ namespace MongoFS.Models
         public string Name { get; set; }
 
         public DateTime Created = DateTime.Now;
+
+
+        public DateTime LastEdit = DateTime.Now;
     }
 }

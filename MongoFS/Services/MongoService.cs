@@ -176,7 +176,10 @@ namespace MongoFS.Services
 
             await this._database.GetCollection<FolderModel>(FOLDERS)
                 .UpdateOneAsync(f => f.Id == parent,
-                    Builders<FolderModel>.Update.Push(f => f.Folders, id));
+                    Builders<FolderModel>.Update.Combine(
+                        Builders<FolderModel>.Update.Push(f => f.Folders, id),
+                        Builders<FolderModel>.Update.Set(f => f.LastEdit, DateTime.Now)
+                    ));
         }
 
 
