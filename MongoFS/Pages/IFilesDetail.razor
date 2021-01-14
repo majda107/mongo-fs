@@ -1,5 +1,6 @@
 @using MongoDB.Bson
 @inject MongoService _ms;
+@inject StateService _ss;
 @inject NavigationManager _nav;
 @inject IJSRuntime jsRuntime;
 
@@ -80,6 +81,7 @@
     [Parameter]
     public EventCallback<IFileModel> IFileSelected { get; set; }
 
+
     [Parameter]
     public IFileModel Selected { get; set; }
 
@@ -123,6 +125,9 @@
     {
         await this._ms.DeleteFolder(f.Id);
         await this.RefreshFolders();
+
+        this._ss.FireDeleted(f.Size);
+
         this.StateHasChanged();
     }
 
@@ -130,6 +135,9 @@
     {
         await this._ms.DeleteFile(f.Id);
         await this.RefreshFiles();
+
+        this._ss.FireDeleted(f.Content?.Length ?? 0);
+
         this.StateHasChanged();
     }
 

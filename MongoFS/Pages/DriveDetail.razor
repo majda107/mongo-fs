@@ -1,4 +1,5 @@
 @inject MongoService _ms;
+@inject StateService _ss;
 
 <div class="drive-detail">
     @if (this.Drive == null)
@@ -44,5 +45,15 @@
 
     [Parameter]
     public EventCallback Deleted { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        this._ss.Deleted += async (o, e) =>
+        {
+            this.Drive.Taken -= e;
+            await this.InvokeAsync(this.StateHasChanged);
+        };
+    }
 
 }
