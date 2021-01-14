@@ -13,7 +13,7 @@
     grid-template-columns: auto auto 1fr auto;
     align-items: center;
     column-gap: 22px;
-    
+
     img:hover {
       cursor: pointer;
     }
@@ -22,12 +22,12 @@
   &-content {
     padding: 32px 24px 52px 24px;
     position: relative;
-    
+
     &-buttons {
       position: absolute;
       left: 34px;
       bottom: -18px;
-      
+
       & > button {
         margin-right: 16px;
         @include drop;
@@ -37,53 +37,57 @@
     & > table {
       table-layout: fixed;
       width: 100%;
-      
+
       & > tbody {
         & > tr {
-          
+
           border-bottom: 1px solid $text-secondary;
-          
+
           &:hover {
             cursor: pointer;
           }
-          
+
           &.selected {
             background-color: $background-secondary;
           }
-          
+
+          &:hover {
+            opacity: 0.7;
+          }
+
           //all tds
           & > td {
             padding: 12px 6px;
             user-select: none;
           }
-          
+
           & > td:nth-of-type(1) {
             width: 80px;
             padding-left: 32px;
-            
+
             & > img {
               height: 32px;
             }
           }
-          
+
           & > td:nth-of-type(3) {
             text-align: center;
           }
-          
+
           & > td:last-of-type {
             padding-right: 32px;
             width: 132px;
-            
+
             & > button {
               width: 90px;
               font-size: 0.75rem;
             }
           }
-          
+
           & > td:nth-of-type(4) {
             width: 22%;
           }
-          
+
           & > td:nth-of-type(5) {
             width: 25%;
           }
