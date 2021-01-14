@@ -1,5 +1,6 @@
 using System;
 using Microsoft.AspNetCore.Components;
+using MongoFS.Models;
 
 namespace MongoFS.Services
 {
@@ -26,7 +27,21 @@ namespace MongoFS.Services
 
 
         public event EventHandler<int> Deleted;
+        public event EventHandler OnSelected;
 
         public void FireDeleted(int size) => this.Deleted?.Invoke(this, size);
+
+
+        private IFileModel selected;
+
+        public IFileModel Selected
+        {
+            get => this.selected;
+            set
+            {
+                this.selected = value;
+                this.OnSelected?.Invoke(this, EventArgs.Empty);
+            }
+        }
     }
 }

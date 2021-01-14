@@ -30,7 +30,7 @@
             <tbody>
             @foreach (var folder in this.folders)
             {
-                <tr class='@(folder?.Id == this.Selected?.Id ? "selected" : "")' @onclick="@(async () => { if (this.searched == "") await this.IFileSelected.InvokeAsync(folder); else { await this.ParentSelected.InvokeAsync(folder); this.searched = "";} })" @ondblclick="@(async () => { await this.ParentSelected.InvokeAsync(folder); })">
+                <tr class='@(folder?.Id == this._ss.Selected?.Id ? "selected" : "")' @onclick="@(async () => { if (this.searched == "") await this.SelectFile(folder); else { await this.ParentSelected.InvokeAsync(folder); this.searched = "";} })" @ondblclick="@(async () => { await this.ParentSelected.InvokeAsync(folder); })">
                     <td>
                         <img src="icons/folder.svg"/>
                     </td>
@@ -46,7 +46,7 @@
 
             @foreach (var file in this.files)
             {
-                <tr class='@(file?.Id == this.Selected?.Id ? "selected" : "")' @onclick="async () => { await this.IFileSelected.InvokeAsync(file); }" @ondblclick="async () => { await this.OpenFile(file); }">
+                <tr class='@(file?.Id == this._ss.Selected?.Id ? "selected" : "")' @onclick="async () => { await this.SelectFile(file); }" @ondblclick="async () => { await this.OpenFile(file); }">
                     <td>
                         <img src="icons/file.svg"/>
                     </td>
@@ -85,12 +85,13 @@
     [Parameter]
     public EventCallback<FolderModel> ParentSelected { get; set; }
 
-    [Parameter]
-    public EventCallback<IFileModel> IFileSelected { get; set; }
+    // [Parameter]
+    // public EventCallback<IFileModel> IFileSelected { get; set; }
+    public async Task SelectFile(IFileModel file) => this._ss.Selected = file;
 
 
-    [Parameter]
-    public IFileModel Selected { get; set; }
+    // [Parameter]
+    // public IFileModel Selected { get; set; }
 
 
     private string searched = "";

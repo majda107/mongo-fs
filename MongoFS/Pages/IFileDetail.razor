@@ -1,5 +1,6 @@
 @using System.Globalization
 @inject MongoService _ms;
+@inject StateService _ss;
 
 <div class="file-detail">
     @if (this.IFile == null)
@@ -87,7 +88,17 @@
 
 @code {
 
-    [Parameter]
+    // [Parameter]
     public IFileModel IFile { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        this._ss.OnSelected += (o, e) =>
+        {
+            this.IFile = this._ss.Selected;
+            this.InvokeAsync(this.StateHasChanged);
+        };
+    }
 
 }
