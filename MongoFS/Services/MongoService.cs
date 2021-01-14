@@ -196,9 +196,11 @@ namespace MongoFS.Services
             });
 
             await this._database.GetCollection<FolderModel>(FOLDERS).UpdateOneAsync(f => f.Id == folder,
-                Builders<FolderModel>.Update.Push(f => f.Files, id));
-
-            // this._database.GetCollection<FolderModel>(FOLDERS).AsQueryable().Where(f => f.)
+                Builders<FolderModel>.Update.Combine(
+                    Builders<FolderModel>.Update.Push(f => f.Files, id),
+                    Builders<FolderModel>.Update.Set(f => f.LastEdit, DateTime.Now)
+                ));
+            // Builders<FolderModel>.Update.Push(f => f.Files, id));
         }
 
 
