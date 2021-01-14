@@ -29,8 +29,8 @@
                 <b>2/12/2020 4:20PM</b>
             </span>
         </div>
-        
-        <button class="danger" @onclick="async () => { await this._ms.DeleteDrive(this.Drive.Id); this.StateHasChanged(); }">Delete</button>
+
+        <button class="danger" @onclick="async () => { await this._ms.DeleteDrive(this.Drive.Id); await this.Deleted.InvokeAsync(); this.StateHasChanged(); }">Delete</button>
     }
 
 
@@ -40,5 +40,9 @@
 
     [Parameter]
     public DriveModel Drive { get; set; }
+
+
+    [Parameter]
+    public EventCallback Deleted { get; set; }
 
 }

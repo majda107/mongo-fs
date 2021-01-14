@@ -27,7 +27,7 @@
     </section>
 
     <section class="mongofs-drive">
-        <DriveDetail Drive="@this.drive"/>
+        <DriveDetail Drive="@this.drive" Deleted="@(() => { this.Selected(null); })"/>
     </section>
 
     <section class="drives">
@@ -46,7 +46,7 @@
     @* <button onclick="window.location.href = '#new'">Trigger modal</button> *@
 
     <div class="overlay" id="new-drive">
-        <form class="overlay-form" @onclick="() => { this._ms.CreateDrive(new DriveModel {Name = this.newDriveName, Capacity = this.newDriveCapacity}); this.StateHasChanged(); }">
+        <form class="overlay-form" @onsubmit="() => { this._ms.CreateDrive(new DriveModel {Name = this.newDriveName, Capacity = this.newDriveCapacity}); this.StateHasChanged(); }">
             <h2>Create new drive</h2>
 
             <div class="overlay-form-control">
@@ -60,7 +60,7 @@
             </div>
 
             <div class="overlay-form-buttons">
-                <button class="success">Create!</button>
+                <button class="success" onclick="window.location.hash = ''">Create!</button>
                 <button type="button" onclick="window.location.hash = ''">Cancel</button>
             </div>
         </form>
@@ -160,7 +160,7 @@
         this.parent = null;
         this.selected = null;
 
-        Console.WriteLine($"Drive {drive.Name} selected!");
+        Console.WriteLine($"Drive {drive?.Name ?? "EMPTY"} selected!");
         this.StateHasChanged();
     }
 
