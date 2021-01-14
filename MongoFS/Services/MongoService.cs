@@ -35,6 +35,7 @@ namespace MongoFS.Services
 
         public void CreateDrive(DriveModel drive)
         {
+            if (drive.Capacity <= 0) throw new Exception("Invalid capacity!");
             this._database.GetCollection<DriveModel>(DRIVE).InsertOne(drive);
         }
 

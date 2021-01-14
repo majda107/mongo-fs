@@ -30,7 +30,7 @@
             <tbody>
             @foreach (var folder in this.folders)
             {
-                <tr class='@(folder?.Id == this._ss.Selected?.Id ? "selected" : "")' @onclick="@(async () => { if (this.searched == "") await this.SelectFile(folder); else { await this.ParentSelected.InvokeAsync(folder); this.searched = "";} })" @ondblclick="@(async () => { await this.ParentSelected.InvokeAsync(folder); })">
+                <tr class='@(folder?.Id == this._ss.Selected?.Id ? "selected" : "")' @onclick="@(async () => { await this.SelectFile(folder); })" @ondblclick="@(async () => { await this.ParentSelected.InvokeAsync(folder); })">
                     <td>
                         <img src="icons/folder.svg"/>
                     </td>
@@ -124,11 +124,14 @@
 
     protected async Task Debounce()
     {
+        this.refreshing = true;
+        
         dts.Cancel();
         dts = new CancellationTokenSource();
         await Task.Delay(500, dts.Token).ContinueWith(async (task) =>
         {
             if (task.IsCanceled) return;
+            this.refreshing = false;
 
             Console.WriteLine($"Debounce! {this.searched}");
             await this.Search();
@@ -159,6 +162,7 @@
         await Task.Delay(200);
 
         this._nav.NavigateTo(url);
+        this._ss.Selected = null;
     }
 
 

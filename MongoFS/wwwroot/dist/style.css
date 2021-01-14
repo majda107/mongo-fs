@@ -154,7 +154,7 @@ ul {
 }
 .files-detail-content-working {
   border-top-left-radius: 6px;
-  border-bottom-right-radius: 6px;
+  border-top-right-radius: 6px;
   position: absolute;
   top: 0;
   left: 0;
@@ -219,7 +219,7 @@ ul {
   border: none;
 }
 
-input {
+select, input {
   border-radius: 4px;
   border: none;
   background-color: #F1F1F1;

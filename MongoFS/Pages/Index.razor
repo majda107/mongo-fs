@@ -39,7 +39,14 @@
     </section>
 
     <section class="files">
-        <IFilesDetail Drive="@this.drive" Parent="@this.parent" ParentSelected="@ParentSelected"/>
+        @if (drive == null)
+        {
+            <span>Please, select a drive to view files...</span>
+        }
+        else
+        {
+            <IFilesDetail Drive="@this.drive" Parent="@this.parent" ParentSelected="@ParentSelected"/>
+        }
     </section>
 
     @* <a href="#new">Modal</a> *@
