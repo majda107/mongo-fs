@@ -1,0 +1,10 @@
+@import "../abstracts/mixins";
+
+#monaco {
+  border-radius: 6px;
+  box-sizing: border-box;
+
+  @include drop;
+
+  overflow: hidden;
+}

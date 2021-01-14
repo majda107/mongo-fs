@@ -3,25 +3,50 @@
 @inject MongoService _ms;
 @inject IJSRuntime jsRuntime;
 
-<h3>FileDetail</h3>
+<div class="mongofs-layout">
+    <section class="mongofs-header">
+        <h1>MongoFS</h1>
+        <span class="subheader">FileSystem to save ‘em all.</span>
+    </section>
 
-@if (file != null)
-{
-    @file.Name
+    <section class="statistics">
+        <div class="statistics-header">
+            <h2>Statistics</h2>
+            <ul>
+                <li>Files: 42</li>
+                <li>Folders: 14</li>
+                <li>Drives: 4</li>
+            </ul>
+        </div>
+        <ul>
+            <li>Running on <b>ASP.NET 5</b></li>
+            <li>Stored in <b>MongoDB</b></li>
+        </ul>
+        <span>Crafted with ❤️ by️ <b>Marián Trpkoš</b></span>
+    </section>
 
-    <span>Type:</span>
-    <input placeholder="Type" @bind="file.Type"/>
+    @if (file != null)
+    {
+        <section>
 
-    <span>Content:</span>
-@*     <textarea @bind="file.Content"></textarea> *@
-    <div id="monaco" style="width: 100%; height: 400px"></div>
+            @file.Name
 
-    <button @onclick="async () => { await this.Save(); }">Save</button>
-}
-else
-{
-    <span>Couldn't find file!</span>
-}
+            <span>Type:</span>
+            <input placeholder="Type" @bind="file.Type"/>
+
+            <button @onclick="async () => { await this.Save(); }">Save</button>
+        </section>
+
+        <section>
+            <div id="monaco" style="width: 100%; height: 400px"></div>
+        </section>
+    }
+    else
+    {
+        <span>Couldn't find file!</span>
+    }
+</div>
+
 
 @code {
 
@@ -41,7 +66,7 @@ else
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (!firstRender) return;
-        await this.jsRuntime.InvokeVoidAsync("CreateEditor", "monaco", "html", this.file.Content);
+        await this.jsRuntime.InvokeVoidAsync("CreateEditor", "monaco", StateService.ToMonacoType(this.file.Type), this.file.Content);
     }
 
     private async Task Save()

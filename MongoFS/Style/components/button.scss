@@ -10,6 +10,13 @@ button {
   color: $text-primary;
 
   font-weight: 500;
+
+
+  transition: 50ms opacity linear;
+
+  &:hover {
+    opacity: 0.65;
+  }
 }
 
 button.danger {

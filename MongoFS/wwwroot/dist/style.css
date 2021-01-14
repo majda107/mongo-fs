@@ -7,6 +7,10 @@ button {
   border: none;
   color: #292929;
   font-weight: 500;
+  transition: 50ms opacity linear;
+}
+button:hover {
+  opacity: 0.65;
 }
 
 button.danger {
@@ -271,6 +275,13 @@ input {
   pointer-events: all !important;
   visibility: visible !important;
   opacity: 1 !important;
+}
+
+#monaco {
+  border-radius: 6px;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 body {
