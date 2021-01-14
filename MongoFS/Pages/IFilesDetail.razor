@@ -1,4 +1,6 @@
 @using MongoDB.Bson
+@using System.Timers
+@using System.Threading
 @inject MongoService _ms;
 @inject StateService _ss;
 @inject NavigationManager _nav;
@@ -12,18 +14,23 @@
     <div class="files-detail-header">
         <img @onclick="async () => { await UpFolder(); }" src="icons/up.svg"/>
         <span>/@(this.Parent?.Name ?? "...")</span>
-        <input placeholder="Today I am looking for ... ?"/>
+        <input placeholder="Today I am looking for ... ?" value="@searched" @oninput="e => searched = e?.Value?.ToString()" @onkeyup="@Debounce"/>
         <span>listing drive <b>@(this.Drive?.Name ?? "...")</b></span>
     </div>
 
     <hr/>
 
     <div class="files-detail-content">
+        @if (this.refreshing)
+        {
+            <div class="files-detail-content-working"></div>
+        }
+
         <table>
             <tbody>
             @foreach (var folder in this.folders)
             {
-                <tr class='@(folder?.Id == this.Selected?.Id ? "selected" : "")' @onclick="async () => { await this.IFileSelected.InvokeAsync(folder); }" @ondblclick="async () => { await this.ParentSelected.InvokeAsync(folder); }">
+                <tr class='@(folder?.Id == this.Selected?.Id ? "selected" : "")' @onclick="@(async () => { if (this.searched == "") await this.IFileSelected.InvokeAsync(folder); else { await this.ParentSelected.InvokeAsync(folder); this.searched = "";} })" @ondblclick="@(async () => { await this.ParentSelected.InvokeAsync(folder); })">
                     <td>
                         <img src="icons/folder.svg"/>
                     </td>
@@ -86,6 +93,48 @@
     public IFileModel Selected { get; set; }
 
 
+    private string searched = "";
+    private bool refreshing = false;
+
+    private CancellationTokenSource dts = new CancellationTokenSource();
+
+
+    // protected async Task Search(KeyboardEventArgs e)
+    protected async Task Search()
+    {
+    // if (e.Code != "Enter") return;
+
+        Console.WriteLine("Searching!");
+
+        if (searched == "")
+        {
+            await this.Refresh();
+        }
+        else
+        {
+            this.files = await this._ms.SearchFiles(this.Drive.Id, this.searched);
+            this.folders = await this._ms.SearchFolders(this.Drive.Id, this.searched);
+
+            Console.WriteLine($"Found {this.files.Count} files and {this.folders.Count} folders");
+        }
+
+        this.InvokeAsync(this.StateHasChanged);
+    }
+
+    protected async Task Debounce()
+    {
+        dts.Cancel();
+        dts = new CancellationTokenSource();
+        await Task.Delay(500, dts.Token).ContinueWith(async (task) =>
+        {
+            if (task.IsCanceled) return;
+
+            Console.WriteLine($"Debounce! {this.searched}");
+            await this.Search();
+        });
+    }
+
+
     private IList<FolderModel> folders = new List<FolderModel>();
     private IList<FileModel> files = new List<FileModel>();
 
@@ -145,6 +194,19 @@
     private async Task RefreshFiles() => this.files = await this._ms.GetFolderFiles(this.Drive.Id, this.Parent?.Id ?? ObjectId.Empty);
 
 
+    private async Task Refresh()
+    {
+        this.refreshing = true;
+
+        await Task.WhenAll(
+            RefreshFiles(),
+            RefreshFolders()
+            );
+
+        this.refreshing = false;
+    }
+
+
     protected override async Task OnParametersSetAsync()
     {
     // OPENING CHANGEURL PREVENTION HACK
@@ -152,8 +214,9 @@
 
     // this.folders = await this._ms.GetFolders(this.Drive.Id, this.Parent?.Id ?? ObjectId.Empty);
     // this.files = await this._ms.GetFolderFiles(this.Drive.Id, this.Parent?.Id ?? ObjectId.Empty);
-        await this.RefreshFolders();
-        await this.RefreshFiles();
+    // await this.RefreshFolders();
+    // await this.RefreshFiles();
+        await this.Refresh();
 
         if (this.Drive == null || !rendered) return;
 

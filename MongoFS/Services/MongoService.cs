@@ -129,6 +129,21 @@ namespace MongoFS.Services
             return res.ToList();
         }
 
+
+        // SEARCH
+        public async Task<IList<FolderModel>> SearchFolders(ObjectId drive, string name)
+        {
+            return (await this._database.GetCollection<FolderModel>(FOLDERS)
+                .FindAsync(f => f.DriveId == drive && f.Name.ToLower().Contains(name.ToLower()))).ToList();
+        }
+
+        public async Task<IList<FileModel>> SearchFiles(ObjectId drive, string name)
+        {
+            return (await this._database.GetCollection<FileModel>(FILES)
+                .FindAsync(f => f.DriveId == drive && f.Name.ToLower().Contains(name.ToLower()))).ToList();
+        }
+
+
         public async Task<FolderModel> GetDriveFolder(ObjectId drive, ObjectId folder)
         {
             return (await this._database.GetCollection<FolderModel>(FOLDERS)

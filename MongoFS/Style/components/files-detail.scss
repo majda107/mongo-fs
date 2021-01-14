@@ -34,6 +34,21 @@
       }
     }
 
+    &-working {
+      border-top-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 4px;
+      width: 100%;
+      
+      z-index: 100000;
+
+      background-color: $primary-color;
+    }
+
     & > table {
       table-layout: fixed;
       width: 100%;

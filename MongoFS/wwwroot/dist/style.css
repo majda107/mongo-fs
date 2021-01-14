@@ -152,6 +152,17 @@ ul {
   margin-right: 16px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
+.files-detail-content-working {
+  border-top-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  z-index: 100000;
+  background-color: #9655FF;
+}
 .files-detail-content > table {
   table-layout: fixed;
   width: 100%;
@@ -281,6 +292,8 @@ input {
 }
 
 #monaco {
+  padding: 12px 6px;
+  background-color: #ffffff;
   border-radius: 6px;
   box-sizing: border-box;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
